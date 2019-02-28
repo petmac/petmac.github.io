@@ -1,23 +1,48 @@
-import Browser
-import Html exposing (Html, button, div, text)
-import Html.Events exposing (onClick)
+module Main exposing (main)
+
+import Browser exposing (Document)
+import Browser.Events exposing (onAnimationFrameDelta)
+import Html exposing (Html, div, text)
+
 
 main =
-  Browser.sandbox { init = 0, update = update, view = view }
+    Browser.document
+        { init = init
+        , view = view
+        , update = update
+        , subscriptions = subscriptions
+        }
 
-type Msg = Increment | Decrement
 
-update msg model =
-  case msg of
-    Increment ->
-      model + 1
+type alias Model =
+    Float
 
-    Decrement ->
-      model - 1
 
+type Msg
+    = Tick Float
+
+
+init : () -> ( Model, Cmd Msg )
+init flags =
+    ( 0, Cmd.none )
+
+
+view : Model -> Document Msg
 view model =
-  div []
-    [ button [ onClick Decrement ] [ text "-" ]
-    , div [] [ text (String.fromInt model) ]
-    , button [ onClick Increment ] [ text "+" ]
-    ]
+    { title = "PetMac"
+    , body =
+        [ text (String.fromFloat model)
+        ]
+    }
+
+
+update : Msg -> Model -> ( Model, Cmd Msg )
+update msg model =
+    case msg of
+        Tick ms ->
+            ( ms, Cmd.none )
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    onAnimationFrameDelta Tick
