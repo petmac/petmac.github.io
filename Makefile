@@ -4,4 +4,4 @@ clean:
 	rm -f index.html
 
 index.html: src/Main.elm
-	elm make $< --output=$@
+	elm make $< --optimize --output=$@
