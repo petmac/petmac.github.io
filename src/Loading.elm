@@ -27,19 +27,18 @@ view : Model -> Document Msg
 view model =
     { title = "Loading"
     , body =
-        [ toUnstyled (text (viewportText model))
-        ]
+        case model of
+            Just viewport ->
+                [ String.fromFloat viewport.viewport.width
+                    ++ " x "
+                    ++ String.fromFloat viewport.viewport.height
+                    |> text
+                    |> toUnstyled
+                ]
+
+            Nothing ->
+                []
     }
-
-
-viewportText : Maybe Viewport -> String
-viewportText mv =
-    case mv of
-        Just viewport ->
-            String.fromFloat viewport.viewport.width ++ " x " ++ String.fromFloat viewport.viewport.height
-
-        Nothing ->
-            "Nothing"
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
