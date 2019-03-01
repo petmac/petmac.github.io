@@ -4797,10 +4797,24 @@ var elm$json$Json$Decode$errorToStringHelp = F2(
 	});
 var elm$core$Platform$Cmd$batch = _Platform_batch;
 var elm$core$Platform$Cmd$none = elm$core$Platform$Cmd$batch(_List_Nil);
-var author$project$Main$init = function (flags) {
+var author$project$Loading$init = function (flags) {
 	return _Utils_Tuple2(0, elm$core$Platform$Cmd$none);
 };
-var author$project$Main$Tick = elm$core$Basics$identity;
+var author$project$Main$LoadingModel = elm$core$Basics$identity;
+var author$project$Main$LoadingMsg = elm$core$Basics$identity;
+var elm$core$Basics$identity = function (x) {
+	return x;
+};
+var elm$core$Platform$Cmd$map = _Platform_map;
+var author$project$Main$init = function (flags) {
+	var _n0 = author$project$Loading$init(flags);
+	var loadingModel = _n0.a;
+	var loadingCmds = _n0.b;
+	return _Utils_Tuple2(
+		loadingModel,
+		A2(elm$core$Platform$Cmd$map, elm$core$Basics$identity, loadingCmds));
+};
+var author$project$Loading$Tick = elm$core$Basics$identity;
 var elm$browser$Browser$AnimationManager$Delta = function (a) {
 	return {$: 1, a: a};
 };
@@ -4826,9 +4840,6 @@ var elm$core$Basics$never = function (_n0) {
 		_n0 = $temp$_n0;
 		continue never;
 	}
-};
-var elm$core$Basics$identity = function (x) {
-	return x;
 };
 var elm$core$Task$Perform = elm$core$Basics$identity;
 var elm$core$Task$init = elm$core$Task$succeed(0);
@@ -5240,25 +5251,58 @@ var elm$browser$Browser$AnimationManager$onAnimationFrameDelta = function (tagge
 		elm$browser$Browser$AnimationManager$Delta(tagger));
 };
 var elm$browser$Browser$Events$onAnimationFrameDelta = elm$browser$Browser$AnimationManager$onAnimationFrameDelta;
-var author$project$Main$subscriptions = function (model) {
+var author$project$Loading$subscriptions = function (model) {
 	return elm$browser$Browser$Events$onAnimationFrameDelta(elm$core$Basics$identity);
 };
-var author$project$Main$update = F2(
+var elm$core$Platform$Sub$map = _Platform_map;
+var author$project$Main$subscriptions = function (model) {
+	var lmodel = model;
+	return A2(
+		elm$core$Platform$Sub$map,
+		elm$core$Basics$identity,
+		author$project$Loading$subscriptions(lmodel));
+};
+var author$project$Loading$update = F2(
 	function (msg, model) {
 		var ms = msg;
 		return _Utils_Tuple2(ms, elm$core$Platform$Cmd$none);
 	});
+var author$project$Main$update = F2(
+	function (msg, model) {
+		var _n0 = _Utils_Tuple2(msg, model);
+		var lmsg = _n0.a;
+		var lmodel = _n0.b;
+		var _n1 = A2(author$project$Loading$update, lmsg, lmodel);
+		var nextModel = _n1.a;
+		var lcmds = _n1.b;
+		return _Utils_Tuple2(
+			nextModel,
+			A2(elm$core$Platform$Cmd$map, elm$core$Basics$identity, lcmds));
+	});
 var elm$core$String$fromFloat = _String_fromNumber;
 var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
-var author$project$Main$view = function (model) {
+var author$project$Loading$view = function (model) {
 	return {
 		ak: _List_fromArray(
 			[
 				elm$html$Html$text(
 				elm$core$String$fromFloat(model))
 			]),
-		ay: 'PetMac'
+		ay: 'Loading'
+	};
+};
+var elm$virtual_dom$VirtualDom$map = _VirtualDom_map;
+var elm$html$Html$map = elm$virtual_dom$VirtualDom$map;
+var author$project$Main$view = function (model) {
+	var lmodel = model;
+	var loadingDoc = author$project$Loading$view(lmodel);
+	return {
+		ak: A2(
+			elm$core$List$map,
+			elm$html$Html$map(elm$core$Basics$identity),
+			loadingDoc.ak),
+		ay: loadingDoc.ay
 	};
 };
 var elm$browser$Browser$document = _Browser_document;
