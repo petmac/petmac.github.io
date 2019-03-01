@@ -3,7 +3,7 @@ module Loading exposing (Model, Msg, init, subscriptions, update, view)
 import Browser exposing (Document)
 import Browser.Dom exposing (Viewport)
 import Browser.Events exposing (onAnimationFrameDelta)
-import Html exposing (Html, div, text)
+import Html.Styled exposing (Html, div, text, toUnstyled)
 import Task
 
 
@@ -27,7 +27,7 @@ view : Model -> Document Msg
 view model =
     { title = "Loading"
     , body =
-        [ text (viewportText model)
+        [ toUnstyled (text (viewportText model))
         ]
     }
 

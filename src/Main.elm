@@ -1,7 +1,8 @@
 module Main exposing (main)
 
 import Browser exposing (Document)
-import Html exposing (Html)
+import Html
+import Html.Styled exposing (Html)
 import Loading
 
 
