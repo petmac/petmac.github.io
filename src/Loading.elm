@@ -40,20 +40,36 @@ generateBars =
 
 barsGenerator : Random.Generator (List Bar)
 barsGenerator =
-    Random.list 1 barGenerator
+    barsGeneratorWithExistingAndTop ( [], 0 )
 
 
-barGenerator : Random.Generator Bar
-barGenerator =
+barsGeneratorWithExistingAndTop : ( List Bar, Float ) -> Random.Generator (List Bar)
+barsGeneratorWithExistingAndTop ( existing, top ) =
+    if top >= 100 then
+        Random.constant existing
+
+    else
+        barGenerator top
+            |> Random.map (barsAndBottom existing)
+            |> Random.andThen barsGeneratorWithExistingAndTop
+
+
+barsAndBottom : List Bar -> Bar -> ( List Bar, Float )
+barsAndBottom heads tail =
+    ( heads ++ [ tail ], tail.top + tail.height )
+
+
+barGenerator : Float -> Random.Generator Bar
+barGenerator top =
     Random.map2
-        (\h col -> { top = 0, height = h, color = col })
-        (Random.float 5 10)
+        (\h col -> { top = top, height = h, color = col })
+        (Random.float 2 3)
         colorGenerator
 
 
 colorGenerator : Random.Generator Color
 colorGenerator =
-    Random.uniform (hex "ff0000") [ hex "00ff00", hex "0000ff" ]
+    Random.uniform (hex "ff0000") [ hex "00ff00", hex "0000ff", hex "ffff00", hex "ff00ff", hex "00ffff" ]
 
 
 view : Model -> Document Msg
