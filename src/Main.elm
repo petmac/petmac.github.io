@@ -1,17 +1,21 @@
 module Main exposing (main)
 
-import Browser exposing (Document)
+import Browser exposing (Document, UrlRequest)
+import Browser.Navigation exposing (Key)
 import Html
 import Html.Styled exposing (Html)
 import Loading
+import Url exposing (Url)
 
 
 main =
-    Browser.document
+    Browser.application
         { init = init
         , view = view
         , update = update
         , subscriptions = subscriptions
+        , onUrlRequest = onUrlRequest
+        , onUrlChange = onUrlChange
         }
 
 
@@ -21,10 +25,12 @@ type Model
 
 type Msg
     = LoadingMsg Loading.Msg
+    | Request UrlRequest
+    | Url Url
 
 
-init : () -> ( Model, Cmd Msg )
-init flags =
+init : () -> Url -> Key -> ( Model, Cmd Msg )
+init flags url key =
     let
         ( loadingModel, loadingCmds ) =
             Loading.init flags
@@ -57,9 +63,28 @@ update msg model =
             , Cmd.map LoadingMsg lcmds
             )
 
+        ( Request (Browser.External href), _ ) ->
+            ( model, Browser.Navigation.load href )
+
+        ( Request (Browser.Internal url), _ ) ->
+            ( model, Cmd.none )
+
+        ( Url _, _ ) ->
+            ( model, Cmd.none )
+
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
     case model of
         LoadingModel lmodel ->
             Loading.subscriptions lmodel |> Sub.map LoadingMsg
+
+
+onUrlRequest : UrlRequest -> Msg
+onUrlRequest =
+    Request
+
+
+onUrlChange : Url -> Msg
+onUrlChange =
+    Url

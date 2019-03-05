@@ -5633,16 +5633,27 @@ var author$project$Loading$init = function (flags) {
 				[author$project$Loading$generateBars])));
 };
 var author$project$Main$LoadingModel = elm$core$Basics$identity;
-var author$project$Main$LoadingMsg = elm$core$Basics$identity;
-var elm$core$Platform$Cmd$map = _Platform_map;
-var author$project$Main$init = function (flags) {
-	var _n0 = author$project$Loading$init(flags);
-	var loadingModel = _n0.a;
-	var loadingCmds = _n0.b;
-	return _Utils_Tuple2(
-		loadingModel,
-		A2(elm$core$Platform$Cmd$map, elm$core$Basics$identity, loadingCmds));
+var author$project$Main$LoadingMsg = function (a) {
+	return {$: 0, a: a};
 };
+var elm$core$Platform$Cmd$map = _Platform_map;
+var author$project$Main$init = F3(
+	function (flags, url, key) {
+		var _n0 = author$project$Loading$init(flags);
+		var loadingModel = _n0.a;
+		var loadingCmds = _n0.b;
+		return _Utils_Tuple2(
+			loadingModel,
+			A2(elm$core$Platform$Cmd$map, author$project$Main$LoadingMsg, loadingCmds));
+	});
+var author$project$Main$Url = function (a) {
+	return {$: 2, a: a};
+};
+var author$project$Main$onUrlChange = author$project$Main$Url;
+var author$project$Main$Request = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Main$onUrlRequest = author$project$Main$Request;
 var author$project$Loading$Tick = function (a) {
 	return {$: 0, a: a};
 };
@@ -6002,7 +6013,7 @@ var author$project$Main$subscriptions = function (model) {
 	var lmodel = model;
 	return A2(
 		elm$core$Platform$Sub$map,
-		elm$core$Basics$identity,
+		author$project$Main$LoadingMsg,
 		author$project$Loading$subscriptions(lmodel));
 };
 var elm$core$Platform$Cmd$none = elm$core$Platform$Cmd$batch(_List_Nil);
@@ -6026,17 +6037,33 @@ var author$project$Loading$update = F2(
 				elm$core$Platform$Cmd$none);
 		}
 	});
+var elm$browser$Browser$Navigation$load = _Browser_load;
 var author$project$Main$update = F2(
 	function (msg, model) {
 		var _n0 = _Utils_Tuple2(msg, model);
-		var lmsg = _n0.a;
-		var lmodel = _n0.b;
-		var _n1 = A2(author$project$Loading$update, lmsg, lmodel);
-		var nextModel = _n1.a;
-		var lcmds = _n1.b;
-		return _Utils_Tuple2(
-			nextModel,
-			A2(elm$core$Platform$Cmd$map, elm$core$Basics$identity, lcmds));
+		switch (_n0.a.$) {
+			case 0:
+				var lmsg = _n0.a.a;
+				var lmodel = _n0.b;
+				var _n1 = A2(author$project$Loading$update, lmsg, lmodel);
+				var nextModel = _n1.a;
+				var lcmds = _n1.b;
+				return _Utils_Tuple2(
+					nextModel,
+					A2(elm$core$Platform$Cmd$map, author$project$Main$LoadingMsg, lcmds));
+			case 1:
+				if (_n0.a.a.$ === 1) {
+					var href = _n0.a.a.a;
+					return _Utils_Tuple2(
+						model,
+						elm$browser$Browser$Navigation$load(href));
+				} else {
+					var url = _n0.a.a.a;
+					return _Utils_Tuple2(model, elm$core$Platform$Cmd$none);
+				}
+			default:
+				return _Utils_Tuple2(model, elm$core$Platform$Cmd$none);
+		}
 	});
 var rtfeldman$elm_css$Css$absolute = {av: 0, u: 'absolute'};
 var rtfeldman$elm_css$Css$Preprocess$AppendProperty = function (a) {
@@ -8468,14 +8495,14 @@ var author$project$Main$view = function (model) {
 	return {
 		bV: A2(
 			elm$core$List$map,
-			elm$html$Html$map(elm$core$Basics$identity),
+			elm$html$Html$map(author$project$Main$LoadingMsg),
 			loadingDoc.bV),
 		cf: loadingDoc.cf
 	};
 };
-var elm$browser$Browser$document = _Browser_document;
-var author$project$Main$main = elm$browser$Browser$document(
-	{b3: author$project$Main$init, ce: author$project$Main$subscriptions, cg: author$project$Main$update, cj: author$project$Main$view});
+var elm$browser$Browser$application = _Browser_application;
+var author$project$Main$main = elm$browser$Browser$application(
+	{b3: author$project$Main$init, b7: author$project$Main$onUrlChange, b8: author$project$Main$onUrlRequest, ce: author$project$Main$subscriptions, cg: author$project$Main$update, cj: author$project$Main$view});
 _Platform_export({'Main':{'init':author$project$Main$main(
 	elm$json$Json$Decode$succeed(0))(0)}});}(this));
 
