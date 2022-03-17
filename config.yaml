@@ -2,3 +2,10 @@ baseURL: https://petmac.dev/
 languageCode: en-gb
 title: Peter Mackay
 theme: ananke
+
+params:
+  ananke_socials:
+    - name: twitter
+      url: https://twitter.com/petmac
+    - name: github
+      url: https://github.com/petmac
