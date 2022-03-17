@@ -1,7 +1,6 @@
 ---
 title: "What is Programming?"
 date: 2022-03-17T16:22:11Z
-draft: true
 ---
 # Introduction
 
