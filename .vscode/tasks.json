@@ -3,7 +3,7 @@
   "tasks": [
     {
       "type": "shell",
-      "command": "hugo server --buildDrafts --watch",
+      "command": "hugo server --buildDrafts",
       "problemMatcher": [],
       "label": "Build",
       "group": {
