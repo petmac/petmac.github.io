@@ -40,9 +40,15 @@ The dynamically allocated nature of object memory also gives rise to its own pro
 
 ## Inheritance
 
-Extending/overriding a class behaviour via subclassing.
+Extending/overriding/reusing a class behaviour via subclassing.
 
-Inheritance is nowadays generally frowned upon as a mechanism for code reuse. Overriding behaviour generally makes code difficult to reason about, and leads to code smells such as empty overridden functions.
+When a class is subclassed, the exact behaviour of the code involved stops being clear. Behaviour is divided between the base class and any number of potential subclasses.
+
+From a code comprehension point of view, the programmer has to keep multiple classes in mind, and multiple files open in their editor, to fully grasp the big picture of how the program works.
+
+Overriding behaviour generally makes code difficult to follow, difficult to reason about, and leads to code smells such as empty overridden functions.
+
+For these reasons (and probably others), inheritance is nowadays generally frowned upon as a mechanism for code reuse.
 
 # Non-characteristics of OOP
 
