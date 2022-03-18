@@ -26,7 +26,7 @@ Characteristics of OOP Division of the problem into Objects which implement Clas
 I believe this to be a poor approach to most data transformation problems.
 Accidental complexity By writing this “architecture” code that does not directly address the data transformation problems at hand, we have burdened ourselves with accidental complexity and latent problems that will at some point prevent us from solving the actual problems we have."><meta itemprop=datePublished content="2022-03-17T16:58:12+00:00">
 <meta itemprop=dateModified content="2022-03-17T16:58:12+00:00">
-<meta itemprop=wordCount content="1118">
+<meta itemprop=wordCount content="1189">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Object-oriented Programming (OOP)">
 <meta name=twitter:description content="What is OOP? First, read Wikipedia.
@@ -104,8 +104,11 @@ HOW TO CODE
 <p>Once the code is split into objects, the program needs to create and maintain the collection of objects, and the references in-between. Whole frameworks (Dependency Injection) have been created to try and remove the burden of object creation from the programmer.</p>
 <p>The dynamically allocated nature of object memory also gives rise to its own problems, such as strong reference cycles in languages which use reference counting to automatically free memory of unused objects.</p>
 <h2 id=inheritance>Inheritance</h2>
-<p>Extending/overriding a class behaviour via subclassing.</p>
-<p>Inheritance is nowadays generally frowned upon as a mechanism for code reuse. Overriding behaviour generally makes code difficult to reason about, and leads to code smells such as empty overridden functions.</p>
+<p>Extending/overriding/reusing a class behaviour via subclassing.</p>
+<p>When a class is subclassed, the exact behaviour of the code involved stops being clear. Behaviour is divided between the base class and any number of potential subclasses.</p>
+<p>From a code comprehension point of view, the programmer has to keep multiple classes in mind, and multiple files open in their editor, to fully grasp the big picture of how the program works.</p>
+<p>Overriding behaviour generally makes code difficult to follow, difficult to reason about, and leads to code smells such as empty overridden functions.</p>
+<p>For these reasons (and probably others), inheritance is nowadays generally frowned upon as a mechanism for code reuse.</p>
 <h1 id=non-characteristics-of-oop>Non-characteristics of OOP</h1>
 <p>These are characteristics which are claimed as those of OOP, which are in fact available to programmers independently of OOP.</p>
 <h2 id=information-hiding>Information hiding</h2>
