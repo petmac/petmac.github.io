@@ -2,33 +2,29 @@
 <head>
 <meta charset=utf-8>
 <meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>Strong and weak object references | Peter Mackay</title>
+<title>Strong and Weak Object References | Peter Mackay</title>
 <meta name=viewport content="width=device-width,minimum-scale=1">
-<meta name=description content="Introduction An object maintains a reference to another object so it can call a method or access a property.
-In languages like Swift, Objective-C, and C++, it’s required that we don’t create cycles of strong references, or we get memory leaks.
-Bugs aside, creating cycles also suggests that the design is somewhat convoluted. We know that architecting a perfect arrangement of objects is not a goal, but we are often drawn into this conundrum by the use of OOP.">
+<meta name=description content="Introduction An object maintains a reference/pointer to another object so it can call a method or access a property. References are called strong if the relationship between the objects is one of ownership, and weak or unowned if it the object containing the reference does not own the object being referred to.
+In languages like Swift, Objective-C, and C++, it’s required that we don’t create cycles of strong references, or we get memory leaks.">
 <meta name=generator content="Hugo 0.91.2">
 <meta name=robots content="noindex, nofollow">
 <link rel=stylesheet href=/ananke/css/main.min.css>
-<meta property="og:title" content="Strong and weak object references">
-<meta property="og:description" content="Introduction An object maintains a reference to another object so it can call a method or access a property.
-In languages like Swift, Objective-C, and C++, it’s required that we don’t create cycles of strong references, or we get memory leaks.
-Bugs aside, creating cycles also suggests that the design is somewhat convoluted. We know that architecting a perfect arrangement of objects is not a goal, but we are often drawn into this conundrum by the use of OOP.">
+<meta property="og:title" content="Strong and Weak Object References">
+<meta property="og:description" content="Introduction An object maintains a reference/pointer to another object so it can call a method or access a property. References are called strong if the relationship between the objects is one of ownership, and weak or unowned if it the object containing the reference does not own the object being referred to.
+In languages like Swift, Objective-C, and C++, it’s required that we don’t create cycles of strong references, or we get memory leaks.">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://petmac.dev/how-to-code/object-refs/"><meta property="article:section" content="how-to-code">
+<meta property="og:url" content="https://petmac.dev/how-to-code/strong-and-weak-object-refs/"><meta property="article:section" content="how-to-code">
 <meta property="article:published_time" content="2022-03-17T23:46:18+00:00">
 <meta property="article:modified_time" content="2022-03-17T23:46:18+00:00">
-<meta itemprop=name content="Strong and weak object references">
-<meta itemprop=description content="Introduction An object maintains a reference to another object so it can call a method or access a property.
-In languages like Swift, Objective-C, and C++, it’s required that we don’t create cycles of strong references, or we get memory leaks.
-Bugs aside, creating cycles also suggests that the design is somewhat convoluted. We know that architecting a perfect arrangement of objects is not a goal, but we are often drawn into this conundrum by the use of OOP."><meta itemprop=datePublished content="2022-03-17T23:46:18+00:00">
+<meta itemprop=name content="Strong and Weak Object References">
+<meta itemprop=description content="Introduction An object maintains a reference/pointer to another object so it can call a method or access a property. References are called strong if the relationship between the objects is one of ownership, and weak or unowned if it the object containing the reference does not own the object being referred to.
+In languages like Swift, Objective-C, and C++, it’s required that we don’t create cycles of strong references, or we get memory leaks."><meta itemprop=datePublished content="2022-03-17T23:46:18+00:00">
 <meta itemprop=dateModified content="2022-03-17T23:46:18+00:00">
-<meta itemprop=wordCount content="268">
+<meta itemprop=wordCount content="389">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="Strong and weak object references">
-<meta name=twitter:description content="Introduction An object maintains a reference to another object so it can call a method or access a property.
-In languages like Swift, Objective-C, and C++, it’s required that we don’t create cycles of strong references, or we get memory leaks.
-Bugs aside, creating cycles also suggests that the design is somewhat convoluted. We know that architecting a perfect arrangement of objects is not a goal, but we are often drawn into this conundrum by the use of OOP.">
+<meta name=twitter:title content="Strong and Weak Object References">
+<meta name=twitter:description content="Introduction An object maintains a reference/pointer to another object so it can call a method or access a property. References are called strong if the relationship between the objects is one of ownership, and weak or unowned if it the object containing the reference does not own the object being referred to.
+In languages like Swift, Objective-C, and C++, it’s required that we don’t create cycles of strong references, or we get memory leaks.">
 </head>
 <body class="ma0 avenir bg-near-white">
 <header>
@@ -70,33 +66,36 @@ How to Code
 HOW TO CODE
 </aside>
 <div id=sharing class="mt3 ananke-socials">
-<a href="https://twitter.com/share?url=https://petmac.dev/how-to-code/object-refs/&text=Strong%20and%20weak%20object%20references" class="ananke-social-link twitter no-underline" aria-label="share on Twitter">
+<a href="https://twitter.com/share?url=https://petmac.dev/how-to-code/strong-and-weak-object-refs/&text=Strong%20and%20Weak%20Object%20References" class="ananke-social-link twitter no-underline" aria-label="share on Twitter">
 <span class=icon><svg style="enable-background:new 0 0 67 67" viewBox="0 0 67 67" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167 22.283c-2.619.953-4.274 3.411-4.086 6.101l.063 1.038-1.048-.127c-3.813-.487-7.145-2.139-9.974-4.915l-1.383-1.377-.356 1.017c-.754 2.267-.272 4.661 1.299 6.271.838.89.649 1.017-.796.487-.503-.169-.943-.296-.985-.233-.146.149.356 2.076.754 2.839.545 1.06 1.655 2.097 2.871 2.712l1.027.487-1.215.021c-1.173.0-1.215.021-1.089.467.419 1.377 2.074 2.839 3.918 3.475l1.299.444-1.131.678c-1.676.976-3.646 1.526-5.616 1.568C19.775 43.256 19 43.341 19 43.405c0 .211 2.557 1.397 4.044 1.864 4.463 1.377 9.765.783 13.746-1.568 2.829-1.673 5.657-5 6.978-8.221.713-1.716 1.425-4.851 1.425-6.354.0-.975.063-1.102 1.236-2.267.692-.678 1.341-1.419 1.467-1.631.21-.403.188-.403-.88-.043-1.781.636-2.033.551-1.152-.402.649-.678 1.425-1.907 1.425-2.267.0-.063-.314.042-.671.233-.377.212-1.215.53-1.844.72l-1.131.361-1.027-.7c-.566-.381-1.361-.805-1.781-.932C39.766 21.902 38.131 21.944 37.167 22.283zM33 64C16.432 64 3 50.569 3 34S16.432 4 33 4s30 13.431 30 30S49.568 64 33 64z" style="fill-rule:evenodd;clip-rule:evenodd"/></svg>
 </span>
 </a>
 </div>
-<h1 class="f1 athelas mt3 mb1">Strong and weak object references</h1>
+<h1 class="f1 athelas mt3 mb1">Strong and Weak Object References</h1>
 <time class="f6 mv4 dib tracked" datetime=2022-03-17T23:46:18Z>March 17, 2022</time>
 </header>
 <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h1 id=introduction>Introduction</h1>
-<p>An object maintains a reference to another object so it can call a method or access a property.</p>
-<p>In languages like Swift, Objective-C, and C++, it’s required that we don’t create cycles of strong references, or we get memory leaks.</p>
-<p>Bugs aside, creating cycles also suggests that the design is somewhat convoluted. We know that architecting a perfect arrangement of objects is not a goal, but we are often drawn into this conundrum by the use of OOP.</p>
-<p><strong>Stop using OOP, stop solving OOP problems.</strong></p>
-<h1 id=clarity-of-purpose>Clarity of purpose</h1>
+<p>An object maintains a reference/pointer to another object so it can call a method or access a property. References are called <em>strong</em> if the relationship between the objects is one of ownership, and <em>weak</em> or <em>unowned</em> if it the object containing the reference does not own the object being referred to.</p>
+<p>In languages like Swift, Objective-C, and C++, it’s required that we don’t create <em>cycles</em> of strong references, or we get memory leaks.</p>
+<p>A cycle is when an object &ldquo;A&rdquo; points directly or indirectly to another object &ldquo;B&rdquo;, and object &ldquo;B&rdquo; points directly or indirectly back to object &ldquo;A&rdquo;.</p>
+<p>Potential for bugs aside, creating cycles also suggests that the design is somewhat inelegant. We know that architecting a perfect arrangement of objects is not a goal, but we are often drawn into this conundrum by the use of OOP.</p>
+<p><strong>Stop using OOP, stop solving OOP-specific problems.</strong></p>
+<p>Let&rsquo;s find a way to help decide if a reference should be strong or weak.</p>
+<h1 id=types-of-reference>Types of reference</h1>
 <p>We tend to find that references to objects fall into 3 categories of purpose:</p>
 <ul>
-<li>I’m telling you to do something (e.g., calling a method)</li>
-<li>I’m asking you for something (e.g., accessing a property)</li>
-<li>I’m telling you something happened (e.g., notifying an observer)</li>
+<li>&ldquo;A&rdquo; tells &ldquo;B&rdquo; to do something (e.g., &ldquo;A&rdquo; calls a method on &ldquo;B&rdquo;)</li>
+<li>&ldquo;A&rdquo; asks &ldquo;B&rdquo; for information (e.g., &ldquo;A&rdquo; accesses a property of &ldquo;B&rdquo;)</li>
+<li>&ldquo;A&rdquo; tells &ldquo;B&rdquo; that something happened (e.g., &ldquo;B&rdquo; is an observer of &ldquo;A&rdquo;)</li>
 </ul>
 <p>Is there an odd one out?</p>
-<p>In the first two categories, if the objects being referenced aren’t there, the code cannot work. In other words, if I depend on you to get my work done, and I can’t communicate with you, then I cannot do my work.</p>
-<p>The latter category is different though, in that the code <em>can still succeed</em>, even when it is not observed.</p>
+<p>In the first two categories, if object &ldquo;B&rdquo; isn&rsquo;t there, the code cannot function. In other words, if &ldquo;A&rdquo; depends on &ldquo;B&rdquo; to get its work done, and &ldquo;A&rdquo; can’t communicate with &ldquo;B&rdquo;, then &ldquo;A&rdquo; cannot do its work.</p>
+<p>The latter category is different though, in that &ldquo;A&rdquo;&rsquo;s work <em>can still succeed</em>, even when it is not observed by &ldquo;B&rdquo;.</p>
 <blockquote>
 <p>If a tree falls in a forest and no one is around to hear it, does it make a sound?</p>
 </blockquote>
 <p>Given that maintaining a reference to an observer is essentially <em>optional</em>, we should strive to make all references in first two categories <strong>strong</strong>, and references that fall into the latter category <strong>weak</strong>.</p>
+<p>That way, in the common case where there is cyclic data flow from a controller object to a worker and back again, there isn&rsquo;t a strong reference cycle preventing the objects from being properly freed.</p>
 <h1 id=summary>Summary</h1>
 <p>References to objects that <em>do stuff</em> should be <strong>strong</strong>.</p>
 <p>References to objects that <em>observe stuff</em> should be <strong>weak</strong>.</p>

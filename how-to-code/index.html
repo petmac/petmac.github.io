@@ -86,14 +86,13 @@ The setup Based on a true story
 <div class="bg-white mb3 pa4 gray overflow-hidden">
 <span class="f6 db">How to Code</span>
 <h1 class="f3 near-black">
-<a href=/how-to-code/object-refs/ class="link black dim">
-Strong and weak object references
+<a href=/how-to-code/strong-and-weak-object-refs/ class="link black dim">
+Strong and Weak Object References
 </a>
 </h1>
 <div class="nested-links f5 lh-copy nested-copy-line-height">
-Introduction An object maintains a reference to another object so it can call a method or access a property.
+Introduction An object maintains a reference/pointer to another object so it can call a method or access a property. References are called strong if the relationship between the objects is one of ownership, and weak or unowned if it the object containing the reference does not own the object being referred to.
 In languages like Swift, Objective-C, and C++, it’s required that we don’t create cycles of strong references, or we get memory leaks.
-Bugs aside, creating cycles also suggests that the design is somewhat convoluted. We know that architecting a perfect arrangement of objects is not a goal, but we are often drawn into this conundrum by the use of OOP.
 </div>
 </div>
 </div>

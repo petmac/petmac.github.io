@@ -92,16 +92,15 @@ The setup Based on a true story
 <div class="flex flex-column flex-row-ns">
 <div class="blah w-100">
 <h1 class="f3 fw1 athelas mt0 lh-title">
-<a href=/how-to-code/object-refs/ class="color-inherit dim link">
-Strong and weak object references
+<a href=/how-to-code/strong-and-weak-object-refs/ class="color-inherit dim link">
+Strong and Weak Object References
 </a>
 </h1>
 <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-Introduction An object maintains a reference to another object so it can call a method or access a property.
+Introduction An object maintains a reference/pointer to another object so it can call a method or access a property. References are called strong if the relationship between the objects is one of ownership, and weak or unowned if it the object containing the reference does not own the object being referred to.
 In languages like Swift, Objective-C, and C++, it’s required that we don’t create cycles of strong references, or we get memory leaks.
-Bugs aside, creating cycles also suggests that the design is somewhat convoluted. We know that architecting a perfect arrangement of objects is not a goal, but we are often drawn into this conundrum by the use of OOP.
 </div>
-<a href=/how-to-code/object-refs/ class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+<a href=/how-to-code/strong-and-weak-object-refs/ class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
 </div>
 </div>
 </div>
