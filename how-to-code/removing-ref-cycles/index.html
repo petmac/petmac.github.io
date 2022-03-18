@@ -4,31 +4,27 @@
 <meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
 <title>Removing Reference Cycles | Peter Mackay</title>
 <meta name=viewport content="width=device-width,minimum-scale=1">
-<meta name=description content="Context If you are gainfully employed, you have probably been forced to accept object-oriented programming into your life. When working with a language like Swift or C++ which doesn&rsquo;t have garbage collection, you will end up with a strong reference cycle, which will result in a memory leak.
-It&rsquo;s good to have some coping strategies for such events. Let&rsquo;s work through an example.
-The setup  Based on a true story">
+<meta name=description content="Context If you are gainfully employed as a programmer, you have probably been forced to accept object-oriented programming into your life. When working with a language like Swift or C++ which doesn&rsquo;t have garbage collection, you will end up in the debugger, trying to locate a strong reference cycle which has resulted in a memory leak.
+Or, you&rsquo;re reviewing a Pull Request and notice that there is a cyclic relationship between some classes.">
 <meta name=generator content="Hugo 0.91.2">
 <meta name=robots content="noindex, nofollow">
 <link rel=stylesheet href=/ananke/css/main.min.css>
 <meta property="og:title" content="Removing Reference Cycles">
-<meta property="og:description" content="Context If you are gainfully employed, you have probably been forced to accept object-oriented programming into your life. When working with a language like Swift or C++ which doesn&rsquo;t have garbage collection, you will end up with a strong reference cycle, which will result in a memory leak.
-It&rsquo;s good to have some coping strategies for such events. Let&rsquo;s work through an example.
-The setup  Based on a true story">
+<meta property="og:description" content="Context If you are gainfully employed as a programmer, you have probably been forced to accept object-oriented programming into your life. When working with a language like Swift or C++ which doesn&rsquo;t have garbage collection, you will end up in the debugger, trying to locate a strong reference cycle which has resulted in a memory leak.
+Or, you&rsquo;re reviewing a Pull Request and notice that there is a cyclic relationship between some classes.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://petmac.dev/how-to-code/removing-ref-cycles/"><meta property="article:section" content="how-to-code">
 <meta property="article:published_time" content="2022-03-17T23:47:10+00:00">
 <meta property="article:modified_time" content="2022-03-17T23:47:10+00:00">
 <meta itemprop=name content="Removing Reference Cycles">
-<meta itemprop=description content="Context If you are gainfully employed, you have probably been forced to accept object-oriented programming into your life. When working with a language like Swift or C++ which doesn&rsquo;t have garbage collection, you will end up with a strong reference cycle, which will result in a memory leak.
-It&rsquo;s good to have some coping strategies for such events. Let&rsquo;s work through an example.
-The setup  Based on a true story"><meta itemprop=datePublished content="2022-03-17T23:47:10+00:00">
+<meta itemprop=description content="Context If you are gainfully employed as a programmer, you have probably been forced to accept object-oriented programming into your life. When working with a language like Swift or C++ which doesn&rsquo;t have garbage collection, you will end up in the debugger, trying to locate a strong reference cycle which has resulted in a memory leak.
+Or, you&rsquo;re reviewing a Pull Request and notice that there is a cyclic relationship between some classes."><meta itemprop=datePublished content="2022-03-17T23:47:10+00:00">
 <meta itemprop=dateModified content="2022-03-17T23:47:10+00:00">
-<meta itemprop=wordCount content="414">
+<meta itemprop=wordCount content="467">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Removing Reference Cycles">
-<meta name=twitter:description content="Context If you are gainfully employed, you have probably been forced to accept object-oriented programming into your life. When working with a language like Swift or C++ which doesn&rsquo;t have garbage collection, you will end up with a strong reference cycle, which will result in a memory leak.
-It&rsquo;s good to have some coping strategies for such events. Let&rsquo;s work through an example.
-The setup  Based on a true story">
+<meta name=twitter:description content="Context If you are gainfully employed as a programmer, you have probably been forced to accept object-oriented programming into your life. When working with a language like Swift or C++ which doesn&rsquo;t have garbage collection, you will end up in the debugger, trying to locate a strong reference cycle which has resulted in a memory leak.
+Or, you&rsquo;re reviewing a Pull Request and notice that there is a cyclic relationship between some classes.">
 </head>
 <body class="ma0 avenir bg-near-white">
 <header>
@@ -79,18 +75,18 @@ HOW TO CODE
 <time class="f6 mv4 dib tracked" datetime=2022-03-17T23:47:10Z>March 17, 2022</time>
 </header>
 <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h1 id=context>Context</h1>
-<p>If you are gainfully employed, you have probably been forced to accept object-oriented programming into your life. When working with a language like Swift or C++ which doesn&rsquo;t have garbage collection, you will end up with a strong reference cycle, which will result in a memory leak.</p>
+<p>If you are gainfully employed as a programmer, you have probably been forced to accept object-oriented programming into your life. When working with a language like Swift or C++ which doesn&rsquo;t have garbage collection, you will end up in the debugger, trying to locate a strong reference cycle which has resulted in a memory leak.</p>
+<p>Or, you&rsquo;re reviewing a Pull Request and notice that there is a cyclic relationship between some classes.</p>
 <p>It&rsquo;s good to have some coping strategies for such events. Let&rsquo;s work through an example.</p>
 <h1 id=the-setup>The setup</h1>
 <blockquote>
 <p>Based on a true story</p>
 </blockquote>
-<p>We have a strong reference cycle between the <code>WebView</code> and <code>MessageHandler</code> classes. The <code>WebView</code> is the main object in this module, and there’s going to be a memory leak when it is released.</p>
-<p>As if that’s not bad enough, <code>WebView</code> has multiple roles: it views webs but <em>also</em> provides <code>Config</code>s, and thus is an egregious violation of the single responsibility principle.</p>
+<p>Let&rsquo;s look at the code:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-swift data-lang=swift><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>WebView</span> {
   <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>let</span> messageHandler = MessageHandler()
   <span style=color:#66d9ef>var</span> config = Config()
-  
+
   <span style=color:#66d9ef>init</span>() {
     <span style=color:#75715e>// Shares mutable state, but not only that...</span>
     <span style=color:#75715e>// Creates a strong reference cycle</span>
@@ -100,18 +96,21 @@ HOW TO CODE
 
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MessageHandler</span> {
   <span style=color:#66d9ef>var</span> webView: WebView? <span style=color:#75715e>// Strong reference</span>
-  
+
   <span style=color:#66d9ef>func</span> <span style=color:#a6e22e>doStuff</span>() {
     <span style=color:#66d9ef>guard</span> <span style=color:#66d9ef>let</span> config = webView?.config <span style=color:#66d9ef>else</span> {
       <span style=color:#75715e>// Should never happen, is almost certainly untested</span>
       <span style=color:#66d9ef>return</span>
     }
-    
+
     <span style=color:#75715e>// Do something with config</span>
   }
 }
-</code></pre></div><h1 id=weak-to-the-rescue><code>weak</code> to the rescue?</h1>
-<p>One might be tempted to change the reference to the <code>WebView</code> to be weak. This would work around the memory leak problem, but it still means that:</p>
+</code></pre></div><p>We have a strong reference cycle between the <code>WebView</code> and <code>MessageHandler</code> classes. <code>WebView</code> is the main object in this module. It owns a <code>MessageHandler</code>, and the <code>MessageHandler</code> depends on the <code>WebView</code> to provide its configuration.</p>
+<p>Due to the strong reference cycle, there’s going to be a memory leak when we try to release the <code>WebView</code>.</p>
+<p>As if that’s not bad enough, <code>WebView</code> has multiple roles: it views webs but <em>also</em> provides <code>Config</code>s, and thus is an egregious violation of the <em>single responsibility principle</em>.</p>
+<h1 id=weak-to-the-rescue><code>weak</code> to the rescue?</h1>
+<p>One might be tempted to change the reference in <code>MessageHandler</code> to the <code>WebView</code> to be weak. This would work around the memory leak problem, but it means that:</p>
 <ul>
 <li><code>doStuff()</code> needs to check <code>config</code> and do something unusual if it&rsquo;s nil</li>
 <li>There’s still a cycle of access between the two classes</li>
@@ -127,7 +126,7 @@ HOW TO CODE
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>WebView</span> {
   <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>let</span> configStore: ConfigStore
   <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>let</span> messageHandler: MessageHandler
-  
+
   <span style=color:#66d9ef>init</span>() {
     configStore = ConfigStore()
     messageHandler = MessageHandler(configStore: configStore)
@@ -136,17 +135,17 @@ HOW TO CODE
 
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MessageHandler</span> {
   <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>let</span> configStore: ConfigStore
-  
+
   <span style=color:#66d9ef>init</span>(configStore: ConfigStore) {
     <span style=color:#66d9ef>self</span>.configStore = configStore
   }
-  
+
   <span style=color:#66d9ef>func</span> <span style=color:#a6e22e>doStuff</span>() {
     <span style=color:#66d9ef>let</span> config = configStore.config <span style=color:#75715e>// Config cannot be nil</span>
     <span style=color:#75715e>// Do something with config</span>
   }
 }
-</code></pre></div><h1 id=conclusion>Conclusion</h1>
+</code></pre></div><h1 id=result>Result</h1>
 <ul>
 <li>Shared mutable state is isolated in the <code>Store</code> class</li>
 <li><code>WebView</code> no longer has multiple roles (does not provide <code>Config</code>s)</li>
