@@ -71,8 +71,8 @@ Recent How to Code
 <div class="flex flex-column flex-row-ns">
 <div class="blah w-100">
 <h1 class="f3 fw1 athelas mt0 lh-title">
-<a href=/how-to-code/fixing-ref-cycles/ class="color-inherit dim link">
-Fixing Strong Reference Cycles
+<a href=/how-to-code/removing-ref-cycles/ class="color-inherit dim link">
+Removing Reference Cycles
 </a>
 </h1>
 <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
@@ -80,7 +80,28 @@ Context If you are gainfully employed, you have probably been forced to accept o
 It&rsquo;s good to have some coping strategies for such events. Let&rsquo;s work through an example.
 The setup Based on a true story
 </div>
-<a href=/how-to-code/fixing-ref-cycles/ class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+<a href=/how-to-code/removing-ref-cycles/ class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+</div>
+</div>
+</div>
+</article>
+</div>
+<div class="relative w-100 mb4">
+<article class="bb b--black-10">
+<div class="db pv4 ph3 ph0-l no-underline dark-gray">
+<div class="flex flex-column flex-row-ns">
+<div class="blah w-100">
+<h1 class="f3 fw1 athelas mt0 lh-title">
+<a href=/how-to-code/object-refs/ class="color-inherit dim link">
+Strong and weak object references
+</a>
+</h1>
+<div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
+Introduction An object maintains a reference to another object so it can call a method or access a property.
+In languages like Swift, Objective-C, and C++, it’s required that we don’t create cycles of strong references, or we get memory leaks.
+Bugs aside, creating cycles also suggests that the design is somewhat convoluted. We know that architecting a perfect arrangement of objects is not a goal, but we are often drawn into this conundrum by the use of OOP.
+</div>
+<a href=/how-to-code/object-refs/ class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
 </div>
 </div>
 </div>
@@ -107,31 +128,14 @@ The principles Single responsibility principle every module, class or function i
 </div>
 </article>
 </div>
-<div class="relative w-100 mb4">
-<article class="bb b--black-10">
-<div class="db pv4 ph3 ph0-l no-underline dark-gray">
-<div class="flex flex-column flex-row-ns">
-<div class="blah w-100">
-<h1 class="f3 fw1 athelas mt0 lh-title">
-<a href=/how-to-code/oop/ class="color-inherit dim link">
-Object-oriented Programming (OOP)
-</a>
-</h1>
-<div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-What is OOP? First, read Wikipedia.
-Characteristics of OOP Division of the problem into Objects which implement Classes The programmer is able to model the problem space in terms of objects that talk to each other via messages (method calls.)
-I believe this to be a poor approach to most data transformation problems.
-Accidental complexity By writing this “architecture” code that does not directly address the data transformation problems at hand, we have burdened ourselves with accidental complexity and latent problems that will at some point prevent us from solving the actual problems we have.
-</div>
-<a href=/how-to-code/oop/ class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-</div>
-</div>
-</div>
-</article>
-</div>
 </section>
 <section class=w-100>
 <h1 class=f3>More</h1>
+<h2 class="f5 fw4 mb4 dib mr3">
+<a href=/how-to-code/oop/ class="link black dim">
+Object-oriented Programming (OOP)
+</a>
+</h2>
 <h2 class="f5 fw4 mb4 dib mr3">
 <a href=/how-to-code/what-is-programming/ class="link black dim">
 What is Programming?
