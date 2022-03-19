@@ -7,7 +7,7 @@
 <meta name=description content="What is OOP? First, read Wikipedia.
 Characteristics of OOP Division of the problem into Objects which implement Classes The programmer is able to model the problem space in terms of objects that talk to each other via messages (method calls.)
 I believe this to be a poor approach to most data transformation problems.
-Accidental complexity By writing this “architecture” code that does not directly address the data transformation problems at hand, we have burdened ourselves with accidental complexity and latent problems that will at some point prevent us from solving the actual problems we have.">
+Noun-ification To encapsulate with OOP, you have to invent names (nouns) for the classes which encapsulate the functionality (verbs).">
 <meta name=generator content="Hugo 0.91.2">
 <meta name=robots content="noindex, nofollow">
 <link rel=stylesheet href=/ananke/css/main.min.css>
@@ -15,7 +15,7 @@ Accidental complexity By writing this “architecture” code that does not dire
 <meta property="og:description" content="What is OOP? First, read Wikipedia.
 Characteristics of OOP Division of the problem into Objects which implement Classes The programmer is able to model the problem space in terms of objects that talk to each other via messages (method calls.)
 I believe this to be a poor approach to most data transformation problems.
-Accidental complexity By writing this “architecture” code that does not directly address the data transformation problems at hand, we have burdened ourselves with accidental complexity and latent problems that will at some point prevent us from solving the actual problems we have.">
+Noun-ification To encapsulate with OOP, you have to invent names (nouns) for the classes which encapsulate the functionality (verbs).">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://petmac.dev/how-to-code/oop/"><meta property="article:section" content="how-to-code">
 <meta property="article:published_time" content="2022-03-17T16:58:12+00:00">
@@ -24,15 +24,15 @@ Accidental complexity By writing this “architecture” code that does not dire
 <meta itemprop=description content="What is OOP? First, read Wikipedia.
 Characteristics of OOP Division of the problem into Objects which implement Classes The programmer is able to model the problem space in terms of objects that talk to each other via messages (method calls.)
 I believe this to be a poor approach to most data transformation problems.
-Accidental complexity By writing this “architecture” code that does not directly address the data transformation problems at hand, we have burdened ourselves with accidental complexity and latent problems that will at some point prevent us from solving the actual problems we have."><meta itemprop=datePublished content="2022-03-17T16:58:12+00:00">
+Noun-ification To encapsulate with OOP, you have to invent names (nouns) for the classes which encapsulate the functionality (verbs)."><meta itemprop=datePublished content="2022-03-17T16:58:12+00:00">
 <meta itemprop=dateModified content="2022-03-17T16:58:12+00:00">
-<meta itemprop=wordCount content="1319">
+<meta itemprop=wordCount content="1487">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Object-oriented Programming (OOP)">
 <meta name=twitter:description content="What is OOP? First, read Wikipedia.
 Characteristics of OOP Division of the problem into Objects which implement Classes The programmer is able to model the problem space in terms of objects that talk to each other via messages (method calls.)
 I believe this to be a poor approach to most data transformation problems.
-Accidental complexity By writing this “architecture” code that does not directly address the data transformation problems at hand, we have burdened ourselves with accidental complexity and latent problems that will at some point prevent us from solving the actual problems we have.">
+Noun-ification To encapsulate with OOP, you have to invent names (nouns) for the classes which encapsulate the functionality (verbs).">
 </head>
 <body class="ma0 avenir bg-near-white">
 <header>
@@ -88,6 +88,21 @@ HOW TO CODE
 <h2 id=division-of-the-problem-into-objects-which-implement-classes>Division of the problem into Objects which implement Classes</h2>
 <p>The programmer is able to model the problem space in terms of objects that talk to each other via messages (method calls.)</p>
 <p>I believe this to be a poor approach to most data transformation problems.</p>
+<h3 id=noun-ification>Noun-ification</h3>
+<p>To encapsulate with OOP, you have to invent <em>names</em> (nouns) for the classes which encapsulate the <em>functionality</em> (verbs). In many cases this is quite difficult, and you end up with names that don&rsquo;t succinctly but completely summarise the functionality being encapsulated.</p>
+<p>For example, let&rsquo;s say you have some code to perform an HTTP request to send a login request (a <code>POST</code>) to your company&rsquo;s REST API. It&rsquo;s easy to invent a function name for this:</p>
+<ul>
+<li>Log in</li>
+<li>Request session</li>
+</ul>
+<p>But when trying to think of a class name, it&rsquo;s tricky. Should the class do more than just logging in? Does it also log out? Does it refresh sessions?</p>
+<ul>
+<li>LoginRequester? That&rsquo;s what it does, but it&rsquo;s not a natural sounding name</li>
+<li>LoginService? That sounds like back end functionality</li>
+<li>Session controller? Maybe, but it sounds vague</li>
+<li>Session manager? Same</li>
+</ul>
+<p>I&rsquo;m not great at naming, but I feel that naming should be something that programmers can do in their sleep. Looking at any OOP codebase, that&rsquo;s simply not the case.</p>
 <h3 id=accidental-complexity>Accidental complexity</h3>
 <p>By writing this “architecture” code that does not directly address the data transformation problems at hand, we have burdened ourselves with accidental complexity and latent problems that will at some point prevent us from solving the actual problems we have.</p>
 <h3 id=many-sources-of-truth>Many sources of truth</h3>
@@ -115,7 +130,7 @@ HOW TO CODE
 <p>The ability to prevent access to functions or data via visibility specifiers like public, internal, private, etc. Most languages have mechanisms for making things private to a module or file, so OOP does not grant this ability.</p>
 <h2 id=encapsulation>Encapsulation</h2>
 <p>The bundling of data with the functions that work with that data. Encapsulation is provided outside of OOP by way of modules.</p>
-<p>Inheritance (arguably OOP’s defining feature) works against encapsulation. <a href=https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)#Encapsulation_and_inheritance>Reference</a></p>
+<p>Inheritance (arguably OOP’s defining feature) works <em>against</em> encapsulation. <a href=https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)#Encapsulation_and_inheritance>Reference</a></p>
 <p>In many cases, problems are solved when we take data from one place, do something with it, and pass it to another. In that case, what is the point in making the data inaccessible, or accessible only via getters and so on?</p>
 <h1 id=how-did-oop-become-the-dominant-paradigm>How did OOP become the dominant paradigm?</h1>
 <p>My experience of OOP was that it came to be popular first through Java, then other languages like C++ and C#.</p>
