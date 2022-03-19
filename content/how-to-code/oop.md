@@ -62,7 +62,7 @@ The ability to prevent access to functions or data via visibility specifiers lik
 
 The bundling of data with the functions that work with that data. Encapsulation is provided outside of OOP by way of modules.
 
-Inheritance (arguably OOP’s defining feature) works against encapsulation. [Reference](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)#Encapsulation_and_inheritance)
+Inheritance (arguably OOP’s defining feature) works against encapsulation. [Reference](<https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)#Encapsulation_and_inheritance>)
 
 In many cases, problems are solved when we take data from one place, do something with it, and pass it to another. In that case, what is the point in making the data inaccessible, or accessible only via getters and so on?
 
@@ -72,12 +72,12 @@ My experience of OOP was that it came to be popular first through Java, then oth
 
 Java quickly gained popularity as it had a bunch of benefits, and attempted to tackle some big problems which existed in languages like C.
 
-* “Write once, run anywhere” via the JVM
-* Automatic memory management
-* Available on servers, desktops, at work, home and in schools/universities
-* Relatively simple to teach beginners
-* Large standard library, which could do Internet stuff
-* Cost-effective (effectively free) to try
+- “Write once, run anywhere” via the JVM
+- Automatic memory management
+- Available on servers, desktops, at work, home and in schools/universities
+- Relatively simple to teach beginners
+- Large standard library, which could do Internet stuff
+- Cost-effective (effectively free) to try
 
 People learned Java in schools and universities, and Java was OOP. By virtue of being the only way to code in Java, OOP effectively Trojan Horse’d its way to being the only way people practiced how to program, and the only way they taught others to program.
 
@@ -103,29 +103,33 @@ Once OOP was established, there were a plethora of books written on the “right
 
 From Design Patterns to Effective C++, there were a lot of rules to help you solve problems by way of increased mastery and adoption of OOP, as well as avoiding shooting yourself in the foot by learning all the language pitfalls.
 
-> Should it be considered a “red flag” that a paradigm is not able to be effectively used without a large number of rules and guidelines?
+Should it be considered a “red flag” that a paradigm is not able to be effectively used without a large number of rules and guidelines?
 
-I was enjoying learning all the rules and systems, and I felt like I was making huge strides in competency as a programmer.
+In my own experience, I was enjoying learning all these new rules and systems, enjoying building stuff, connecting stuff, and I felt like I was making huge strides in competency as a programmer.
 
-I didn’t know at the time, but it was like a cult where the only way to successfully use OOP was to pay to level up in OOP.
+I didn’t know at the time, but I had fallen into the classic "programmers love to program" trap. I was writing programs, there was lots of message passing going on, but those programs were mostly boilerplate, as there was a very low signal-to-noise ratio. "Signal" in this case being code that does honest-to-goodness _work_, and "noise" being the rest of the code that declares objects, initialises them, and connects them together. Code that exists entirely to facilitate an object-oriented design. That's accidental complexity. It's not complexity that's inherent in the problem, it was what I added.
+
+But maybe I just wasn't doing OOP _the right way_?
+
+Again, I didn't realise it, but it was almost like a cult where the only way to successfully use OOP was to pay to level up in OOP.
 
 Clean architecture was always just around the corner, but after trying for approximately 15 years I never actually got there.
 
-I’m not the only one who came to this conclusion: Casey Muratori recorded [an excellent rant on the topic](https://www.youtube.com/watch?v=ZM1ZDaaEyMY).
+I’m not the only one who has arrived at this conclusion: Casey Muratori recorded [an excellent rant on the topic](https://www.youtube.com/watch?v=ZM1ZDaaEyMY). It's a short video and well worth your time.
 
 # Where is OOP headed?
 
 OOP’s defining feature (inheritance) is generally regarded to be a poor form of code reuse, and is to be avoided.
 
-Most languages that support OOP also have non-OOP features like closures, free functions, value types, and functional-style map/filter/flatMap, that sort of thing.
+Many languages that support OOP also have non-OOP features like closures, free functions, value types, and functional-style map/filter/flat-map, that sort of thing.
 
-Even UI toolkits, traditionally the most prominent application of OOP, are leaning away from hierarchies of objects and towards declarative, functional approaches:
+Even UI toolkits, traditionally the most prominent application of OOP, are steering away from hierarchies of objects and towards declarative, functional approaches. For example:
 
-* React
-* Elm
-* SwiftUI
-* Jetpack Compose
+- React
+- Elm
+- SwiftUI
+- Jetpack Compose
 
-My belief is that OOP code should be considered legacy, and programmers should reach for functions and structs before they resort to writing a class.
+My belief is that OOP code should be considered _legacy_, and programmers should reach for functions and structs before they resort to writing a class.
 
-That’s not to say classes are useless. Being a reference type, classes are good for shared mutable state. If you need to write a Store-type data structure which will be used to share data between multiple places, use a class.
+That’s not to say classes are useless. Being a reference type, classes are good for sharing mutable state. If you need to write a Store-type data structure which will be used to share data between multiple places, you could use a class.
