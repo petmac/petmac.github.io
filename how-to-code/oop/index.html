@@ -26,7 +26,7 @@ Characteristics of OOP Division of the problem into Objects which implement Clas
 I believe this to be a poor approach to most data transformation problems.
 Accidental complexity By writing this “architecture” code that does not directly address the data transformation problems at hand, we have burdened ourselves with accidental complexity and latent problems that will at some point prevent us from solving the actual problems we have."><meta itemprop=datePublished content="2022-03-17T16:58:12+00:00">
 <meta itemprop=dateModified content="2022-03-17T16:58:12+00:00">
-<meta itemprop=wordCount content="1189">
+<meta itemprop=wordCount content="1319">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Object-oriented Programming (OOP)">
 <meta name=twitter:description content="What is OOP? First, read Wikipedia.
@@ -143,25 +143,25 @@ HOW TO CODE
 <h1 id=the-never-ending-plateau-of-learning-oop>The never-ending plateau of learning OOP</h1>
 <p>Once OOP was established, there were a plethora of books written on the “right way” to architect OOP programs.</p>
 <p>From Design Patterns to Effective C++, there were a lot of rules to help you solve problems by way of increased mastery and adoption of OOP, as well as avoiding shooting yourself in the foot by learning all the language pitfalls.</p>
-<blockquote>
 <p>Should it be considered a “red flag” that a paradigm is not able to be effectively used without a large number of rules and guidelines?</p>
-</blockquote>
-<p>I was enjoying learning all the rules and systems, and I felt like I was making huge strides in competency as a programmer.</p>
-<p>I didn’t know at the time, but it was like a cult where the only way to successfully use OOP was to pay to level up in OOP.</p>
+<p>In my own experience, I was enjoying learning all these new rules and systems, enjoying building stuff, connecting stuff, and I felt like I was making huge strides in competency as a programmer.</p>
+<p>I didn’t know at the time, but I had fallen into the classic &ldquo;programmers love to program&rdquo; trap. I was writing programs, there was lots of message passing going on, but those programs were mostly boilerplate, as there was a very low signal-to-noise ratio. &ldquo;Signal&rdquo; in this case being code that does honest-to-goodness <em>work</em>, and &ldquo;noise&rdquo; being the rest of the code that declares objects, initialises them, and connects them together. Code that exists entirely to facilitate an object-oriented design. That&rsquo;s accidental complexity. It&rsquo;s not complexity that&rsquo;s inherent in the problem, it was what I added.</p>
+<p>But maybe I just wasn&rsquo;t doing OOP <em>the right way</em>?</p>
+<p>Again, I didn&rsquo;t realise it, but it was almost like a cult where the only way to successfully use OOP was to pay to level up in OOP.</p>
 <p>Clean architecture was always just around the corner, but after trying for approximately 15 years I never actually got there.</p>
-<p>I’m not the only one who came to this conclusion: Casey Muratori recorded <a href="https://www.youtube.com/watch?v=ZM1ZDaaEyMY">an excellent rant on the topic</a>.</p>
+<p>I’m not the only one who has arrived at this conclusion: Casey Muratori recorded <a href="https://www.youtube.com/watch?v=ZM1ZDaaEyMY">an excellent rant on the topic</a>. It&rsquo;s a short video and well worth your time.</p>
 <h1 id=where-is-oop-headed>Where is OOP headed?</h1>
 <p>OOP’s defining feature (inheritance) is generally regarded to be a poor form of code reuse, and is to be avoided.</p>
-<p>Most languages that support OOP also have non-OOP features like closures, free functions, value types, and functional-style map/filter/flatMap, that sort of thing.</p>
-<p>Even UI toolkits, traditionally the most prominent application of OOP, are leaning away from hierarchies of objects and towards declarative, functional approaches:</p>
+<p>Many languages that support OOP also have non-OOP features like closures, free functions, value types, and functional-style map/filter/flat-map, that sort of thing.</p>
+<p>Even UI toolkits, traditionally the most prominent application of OOP, are steering away from hierarchies of objects and towards declarative, functional approaches. For example:</p>
 <ul>
 <li>React</li>
 <li>Elm</li>
 <li>SwiftUI</li>
 <li>Jetpack Compose</li>
 </ul>
-<p>My belief is that OOP code should be considered legacy, and programmers should reach for functions and structs before they resort to writing a class.</p>
-<p>That’s not to say classes are useless. Being a reference type, classes are good for shared mutable state. If you need to write a Store-type data structure which will be used to share data between multiple places, use a class.</p>
+<p>My belief is that OOP code should be considered <em>legacy</em>, and programmers should reach for functions and structs before they resort to writing a class.</p>
+<p>That’s not to say classes are useless. Being a reference type, classes are good for sharing mutable state. If you need to write a Store-type data structure which will be used to share data between multiple places, you could use a class.</p>
 <ul class=pa0>
 </ul>
 <div class="mt6 instapaper_ignoref">
