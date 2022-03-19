@@ -15,6 +15,24 @@ The programmer is able to model the problem space in terms of objects that talk 
 
 I believe this to be a poor approach to most data transformation problems.
 
+### Noun-ification
+
+To encapsulate with OOP, you have to invent _names_ (nouns) for the classes which encapsulate the _functionality_ (verbs). In many cases this is quite difficult, and you end up with names that don't succinctly but completely summarise the functionality being encapsulated.
+
+For example, let's say you have some code to perform an HTTP request to send a login request (a `POST`) to your company's REST API. It's easy to invent a function name for this:
+
+- Log in
+- Request session
+
+But when trying to think of a class name, it's tricky. Should the class do more than just logging in? Does it also log out? Does it refresh sessions?
+
+- LoginRequester? That's what it does, but it's not a natural sounding name
+- LoginService? That sounds like back end functionality
+- Session controller? Maybe, but it sounds vague
+- Session manager? Same
+
+I'm not great at naming, but I feel that naming should be something that programmers can do in their sleep. Looking at any OOP codebase, that's simply not the case.
+
 ### Accidental complexity
 
 By writing this “architecture” code that does not directly address the data transformation problems at hand, we have burdened ourselves with accidental complexity and latent problems that will at some point prevent us from solving the actual problems we have.
@@ -62,7 +80,7 @@ The ability to prevent access to functions or data via visibility specifiers lik
 
 The bundling of data with the functions that work with that data. Encapsulation is provided outside of OOP by way of modules.
 
-Inheritance (arguably OOP’s defining feature) works against encapsulation. [Reference](<https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)#Encapsulation_and_inheritance>)
+Inheritance (arguably OOP’s defining feature) works _against_ encapsulation. [Reference](<https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)#Encapsulation_and_inheritance>)
 
 In many cases, problems are solved when we take data from one place, do something with it, and pass it to another. In that case, what is the point in making the data inaccessible, or accessible only via getters and so on?
 
