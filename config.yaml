@@ -1,11 +1,12 @@
 baseURL: https://petmac.dev/
 languageCode: en-gb
 title: Peter Mackay
-theme: ananke
+theme: hugo-book
 
 SectionPagesMenu: main
 
 params:
+  BookSection: "*"
   ananke_socials:
     - name: twitter
       url: https://twitter.com/petmac
