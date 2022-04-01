@@ -20,7 +20,7 @@ For value types such as integers and floating point numbers, it&rsquo;s not cont
 <meta itemprop=description content="Introduction One of the first code smells we encounter when working with an object-oriented language where everything is an object, or everything subclasses a common base class, or there are no static methods, is how OOP typically handles equality of objects.
 For value types such as integers and floating point numbers, it&rsquo;s not controversial that we should be able to compare them and decide if they&rsquo;re equal or not. Integers can be compared by bits, and data structures can be compared by descending into the structure and comparing elements."><meta itemprop=datePublished content="2022-04-01T15:26:29+00:00">
 <meta itemprop=dateModified content="2022-04-01T15:26:29+00:00">
-<meta itemprop=wordCount content="2008">
+<meta itemprop=wordCount content="2041">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Object Equality">
 <meta name=twitter:description content="Introduction One of the first code smells we encounter when working with an object-oriented language where everything is an object, or everything subclasses a common base class, or there are no static methods, is how OOP typically handles equality of objects.
@@ -178,8 +178,11 @@ BLOG POSTS
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>bool</span> Equals(<span style=color:#66d9ef>object</span> obj) =&gt; <span style=color:#66d9ef>this</span>.Equals(obj <span style=color:#66d9ef>as</span> TwoDPoint);
 </code></pre></div><p>To override <code>System.Object.Equals</code>, it appears to be best practice to do a run-time cast of <code>obj</code> to our class type, which will result in either a reference to our class, or reference to a subclass, or a null pointer, and then we pass that into a different, more specific, <code>Equals</code> method to do the work.</p>
 <p>As opposed to the call being clear and unambiguous, we rely on language-lawyer knowledge to know which <code>Equals</code> method we&rsquo;re calling into. We&rsquo;re not recursing into the same method again, we&rsquo;re calling a <em>different</em> <code>Equals</code> method.</p>
-<p>To paraphrase <a href=https://twitter.com/venkat_s>Dr. Venkat Subramaniam</a>:</p>
-<p>Strive to write code which has <em>obviously no problems</em>, rather than code which has <em>no obvious problems.</em></p>
+<blockquote>
+<p>There are two ways of constructing a software design. One way is to make it so simple that there are <strong>obviously</strong> no deficiencies. And the other way is to make it so complicated that there are no <strong>obvious</strong> deficiencies.</p>
+<p>&ndash; <a href=https://wiki.c2.com/?TwoWaysToDesign>Tony Hoare</a></p>
+</blockquote>
+<p>(Thank you <a href=https://twitter.com/venkat_s>Dr. Venkat Subramaniam</a> for clarifying the author of the above quote.)</p>
 <h3 id=iequatabletequals-implementation><code>IEquatable&lt;T>.Equals</code> implementation</h3>
 <p>Acknowledging that <code>System.Object.Equals</code> is terrible, Microsoft provided <em>another</em> equality mechanism: The interface <code>IEquatable&lt;T></code>. This improves on the previous approach by allowing the programmer to constrain the types of object that we can compare equality to. Sounds good, right?</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>bool</span> Equals(TwoDPoint p)
