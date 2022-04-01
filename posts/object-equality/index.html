@@ -4,26 +4,26 @@
 <meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
 <title>Object Equality | Peter Mackay</title>
 <meta name=viewport content="width=device-width,minimum-scale=1">
-<meta name=description content="Introduction One of the first code smells we encounter when working with an object-oriented language where everything is an object, or everything subclasses an common base class, or there are no static methods, is how OOP typically handles equality of objects.
+<meta name=description content="Introduction One of the first code smells we encounter when working with an object-oriented language where everything is an object, or everything subclasses a common base class, or there are no static methods, is how OOP typically handles equality of objects.
 For value types such as integers and floating point numbers, it&rsquo;s not controversial that we should be able to compare them and decide if they&rsquo;re equal or not. Integers can be compared by bits, and data structures can be compared by descending into the structure and comparing elements.">
 <meta name=generator content="Hugo 0.91.2">
 <meta name=robots content="noindex, nofollow">
 <link rel=stylesheet href=/ananke/css/main.min.css>
 <meta property="og:title" content="Object Equality">
-<meta property="og:description" content="Introduction One of the first code smells we encounter when working with an object-oriented language where everything is an object, or everything subclasses an common base class, or there are no static methods, is how OOP typically handles equality of objects.
+<meta property="og:description" content="Introduction One of the first code smells we encounter when working with an object-oriented language where everything is an object, or everything subclasses a common base class, or there are no static methods, is how OOP typically handles equality of objects.
 For value types such as integers and floating point numbers, it&rsquo;s not controversial that we should be able to compare them and decide if they&rsquo;re equal or not. Integers can be compared by bits, and data structures can be compared by descending into the structure and comparing elements.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://petmac.dev/posts/object-equality/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-04-01T15:26:29+00:00">
 <meta property="article:modified_time" content="2022-04-01T15:26:29+00:00">
 <meta itemprop=name content="Object Equality">
-<meta itemprop=description content="Introduction One of the first code smells we encounter when working with an object-oriented language where everything is an object, or everything subclasses an common base class, or there are no static methods, is how OOP typically handles equality of objects.
+<meta itemprop=description content="Introduction One of the first code smells we encounter when working with an object-oriented language where everything is an object, or everything subclasses a common base class, or there are no static methods, is how OOP typically handles equality of objects.
 For value types such as integers and floating point numbers, it&rsquo;s not controversial that we should be able to compare them and decide if they&rsquo;re equal or not. Integers can be compared by bits, and data structures can be compared by descending into the structure and comparing elements."><meta itemprop=datePublished content="2022-04-01T15:26:29+00:00">
 <meta itemprop=dateModified content="2022-04-01T15:26:29+00:00">
 <meta itemprop=wordCount content="1974">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Object Equality">
-<meta name=twitter:description content="Introduction One of the first code smells we encounter when working with an object-oriented language where everything is an object, or everything subclasses an common base class, or there are no static methods, is how OOP typically handles equality of objects.
+<meta name=twitter:description content="Introduction One of the first code smells we encounter when working with an object-oriented language where everything is an object, or everything subclasses a common base class, or there are no static methods, is how OOP typically handles equality of objects.
 For value types such as integers and floating point numbers, it&rsquo;s not controversial that we should be able to compare them and decide if they&rsquo;re equal or not. Integers can be compared by bits, and data structures can be compared by descending into the structure and comparing elements.">
 </head>
 <body class="ma0 avenir bg-near-white">
@@ -75,7 +75,7 @@ BLOG POSTS
 <time class="f6 mv4 dib tracked" datetime=2022-04-01T15:26:29Z>April 1, 2022</time>
 </header>
 <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h2 id=introduction>Introduction</h2>
-<p>One of the first code smells we encounter when working with an object-oriented language where everything is an <em>object</em>, or everything subclasses an common base class, or there are no static methods, is how OOP typically handles equality of objects.</p>
+<p>One of the first code smells we encounter when working with an object-oriented language where everything is an <em>object</em>, or everything subclasses a common base class, or there are no static methods, is how OOP typically handles equality of objects.</p>
 <p>For value types such as integers and floating point numbers, it&rsquo;s not controversial that we should be able to compare them and decide if they&rsquo;re equal or not. Integers can be compared by bits, and data structures can be compared by descending into the structure and comparing elements.</p>
 <p>For types passed by reference, such as classes in Java, C#, Swift, Objective-C and so on, it&rsquo;s extremely complicated. Sometimes we care about equality (two reference point to different objects, but those objects contain the same values) and sometimes we care about identity (two references point to the same object.)</p>
 <h2 id=properties-of-equatability>Properties of equatability</h2>
@@ -206,7 +206,7 @@ BLOG POSTS
 </span><span style=color:#75715e>// Note that the base class is not invoked because it is
 </span><span style=color:#75715e>// System.Object, which defines Equals as reference equality.
 </span><span style=color:#75715e></span><span style=color:#66d9ef>return</span> (X == p.X) &amp;&amp; (Y == p.Y);
-</code></pre></div><p>The programmer has to check the individual fields and not make any copy and paste errors. If new fields are added, this code <em>must</em> be updated. That&rsquo;s not ideal, but fairly standard when the compiler cannot generate the comparison code for us:</p>
+</code></pre></div><p>The programmer has to check the individual fields and not make any copy and paste errors. If new fields are added, this code <em>must</em> be updated. That&rsquo;s not ideal, but fairly standard when the compiler cannot generate the comparison code for us.</p>
 <p>There is another lurking footgun, where we must be absolutely sure not to call into a base class, or risk infinite recursion, or inadvertently performing reference equality.</p>
 <h3 id=systemobjectgethashcode-override><code>System.Object.GetHashCode</code> override</h3>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>int</span> GetHashCode() =&gt; (X, Y).GetHashCode();
