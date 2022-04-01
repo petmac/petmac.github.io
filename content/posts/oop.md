@@ -139,7 +139,11 @@ Again, I didn't realise it, but it was almost like a cult where the only way to 
 
 Clean architecture was always just around the corner, but after trying for approximately 15 years I never actually got there.
 
-I’m not the only one who has arrived at this conclusion: Casey Muratori recorded [an excellent rant on the topic](https://www.youtube.com/watch?v=ZM1ZDaaEyMY). It's a short video and well worth your time.
+I’m not the only one who has arrived at this conclusion: Casey Muratori recorded an excellent rant on the topic:
+
+{{< youtube ZM1ZDaaEyMY >}}
+
+It's a short video and well worth your time.
 
 ## Where is OOP headed?
 
