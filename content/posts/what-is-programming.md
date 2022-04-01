@@ -8,6 +8,7 @@ title: "What is Programming?"
 toc: true
 type: "post"
 ---
+
 ## Introduction
 
 This page borrows heavily from [Mike Acton](https://twitter.com/mike_acton).

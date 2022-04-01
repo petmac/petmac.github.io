@@ -11,7 +11,7 @@ type: "post"
 
 ## Introduction
 
-One of the first code smells we encounter when working with an object-oriented language where everything is an *object*, or everything subclasses a common base class, or there are no static methods, is how OOP typically handles equality of objects.
+One of the first code smells we encounter when working with an object-oriented language where everything is an _object_, or everything subclasses a common base class, or there are no static methods, is how OOP typically handles equality of objects.
 
 For value types such as integers and floating point numbers, it's not controversial that we should be able to compare them and decide if they're equal or not. Integers can be compared by bits, and data structures can be compared by descending into the structure and comparing elements.
 
@@ -21,7 +21,7 @@ For types passed by reference, such as classes in Java, C#, Swift, Objective-C a
 
 There are a few properties of equatability that we can consider to help us recognise whether a language has a good quality equality solution, or not.
 
-### Equals expressions should be *commutative*
+### Equals expressions should be _commutative_
 
 That is, "is A equal to B?" should always evaluate to the same boolean value as "is B equal to A?" How does that square with a typical OO solution to equality, where you have to compare values like the following snippet?
 
@@ -31,23 +31,23 @@ a.equals(b)
 
 By giving the left-hand value in the comparison a special role -- i.e., the calculator of the result -- if we were to reverse the order of `a` and `b`, we could then be calling the equals method of a completely different type! In that case, there is no guarantee of commutativity.
 
-For this reason, the equals function or operator *should not be an instance method*. The equality function should be a *static method* or even a *free function*.
+For this reason, the equals function or operator _should not be an instance method_. The equality function should be a _static method_ or even a _free function_.
 
 ### Values can only be equal if they are of the same type
 
 For example, with basic types:
 
-* Integers of the same width can be compared trivially
-* Integers of different widths can be compared, if they can be promoted to a larger width
-* Floating point numbers of the same width can be compared trivially
-* Single-precision floating point numbers can be compared with double-precision numbers
-* Integers and floating point numbers can be compared, if the integer can be promoted to a floating point number without loss of precision
+- Integers of the same width can be compared trivially
+- Integers of different widths can be compared, if they can be promoted to a larger width
+- Floating point numbers of the same width can be compared trivially
+- Single-precision floating point numbers can be compared with double-precision numbers
+- Integers and floating point numbers can be compared, if the integer can be promoted to a floating point number without loss of precision
 
 For more complex types, such as data structures:
 
-* Two data structures of the same type can be compared fairly trivially by comparing the contents
-* Two data structures of unrelated types *can never* be equal
-* Two data structures of related types can also *never* be equal, because one type will have data or some other attribute that is missing from the other
+- Two data structures of the same type can be compared fairly trivially by comparing the contents
+- Two data structures of unrelated types _can never_ be equal
+- Two data structures of related types can also _never_ be equal, because one type will have data or some other attribute that is missing from the other
 
 For this reason, a language should (at compile time) forbid comparisons of incompatible types.
 
@@ -55,9 +55,9 @@ For this reason, a language should (at compile time) forbid comparisons of incom
 
 For languages which burden programmers with null references, they have a few properties when compared:
 
-* Nulls are always equal
-* A null is never equal to a non-null
-* Two non-nulls may be equal in terms of reference equality or value equality
+- Nulls are always equal
+- A null is never equal to a non-null
+- Two non-nulls may be equal in terms of reference equality or value equality
 
 While these properties are fairly easy to check, requiring the programmer to do it manually results in lots of error-prone boilerplate that will likely be glossed over in code reviews.
 
@@ -135,7 +135,7 @@ class TwoDPoint : IEquatable<TwoDPoint>
 }
 ```
 
-This class is a container for 8 bytes. We're going to do a *lot* of work to compare these 8 bytes against another 8 bytes. Let's dig in.
+This class is a container for 8 bytes. We're going to do a _lot_ of work to compare these 8 bytes against another 8 bytes. Let's dig in.
 
 ### `System.Object.Equals` override
 
@@ -145,7 +145,7 @@ public override bool Equals(object obj) => this.Equals(obj as TwoDPoint);
 
 To override `System.Object.Equals`, it appears to be best practice to do a run-time cast of `obj` to our class type, which will result in either a reference to our class, or reference to a subclass, or a null pointer, and then we pass that into a different, more specific, `Equals` method to do the work.
 
-As opposed to the call being clear and unambiguous, we rely on language-lawyer knowledge to know which `Equals` method we're calling into. We're not recursing into the same method again, we're calling a *different* `Equals` method.
+As opposed to the call being clear and unambiguous, we rely on language-lawyer knowledge to know which `Equals` method we're calling into. We're not recursing into the same method again, we're calling a _different_ `Equals` method.
 
 > There are two ways of constructing a software design. One way is to make it so simple that there are **obviously** no deficiencies. And the other way is to make it so complicated that there are no **obvious** deficiencies.
 >
@@ -155,7 +155,7 @@ As opposed to the call being clear and unambiguous, we rely on language-lawyer k
 
 ### `IEquatable<T>.Equals` implementation
 
-Acknowledging that `System.Object.Equals` is terrible, Microsoft provided *another* equality mechanism: The interface `IEquatable<T>`. This improves on the previous approach by allowing the programmer to constrain the types of object that we can compare equality to. Sounds good, right?
+Acknowledging that `System.Object.Equals` is terrible, Microsoft provided _another_ equality mechanism: The interface `IEquatable<T>`. This improves on the previous approach by allowing the programmer to constrain the types of object that we can compare equality to. Sounds good, right?
 
 ```csharp
 public bool Equals(TwoDPoint p)
@@ -172,7 +172,7 @@ if (p is null)
 }
 ```
 
-Not strictly required, but each implementation *should* check that the two objects aren't in fact the same object:
+Not strictly required, but each implementation _should_ check that the two objects aren't in fact the same object:
 
 ```csharp
 // Optimization for a common success case.
@@ -201,7 +201,7 @@ Finally, after a dozen lines of boilerplate, we reach the actual comparison:
 return (X == p.X) && (Y == p.Y);
 ```
 
-The programmer has to check the individual fields and not make any copy and paste errors. If new fields are added, this code *must* be updated. That's not ideal, but fairly standard when the compiler cannot generate the comparison code for us.
+The programmer has to check the individual fields and not make any copy and paste errors. If new fields are added, this code _must_ be updated. That's not ideal, but fairly standard when the compiler cannot generate the comparison code for us.
 
 There is another lurking footgun, where we must be absolutely sure not to call into a base class, or risk infinite recursion, or inadvertently performing reference equality.
 
@@ -211,11 +211,11 @@ There is another lurking footgun, where we must be absolutely sure not to call i
 public override int GetHashCode() => (X, Y).GetHashCode();
 ```
 
-There's a rule that if two objects are *equal*, they must also have the same hash code. This is required for correct operation of dictionaries and other collections that use hash codes to optimise lookup. Because we override `Equals`, we must also override `GetHashCode`.
+There's a rule that if two objects are _equal_, they must also have the same hash code. This is required for correct operation of dictionaries and other collections that use hash codes to optimise lookup. Because we override `Equals`, we must also override `GetHashCode`.
 
 It's been a while since I used C#. I wonder does the compiler enforce this requirement?
 
-Again, we access the `X` and `Y` fields here, so if any more fields are added, this code should be updated. I say *should* rather than *must*, as I understand it's sometimes OK for a hash code to not always use every field. I'm not an expert in hashing. I would probably use all fields just to be safe.
+Again, we access the `X` and `Y` fields here, so if any more fields are added, this code should be updated. I say _should_ rather than _must_, as I understand it's sometimes OK for a hash code to not always use every field. I'm not an expert in hashing. I would probably use all fields just to be safe.
 
 ### `==` operator
 
@@ -259,7 +259,7 @@ Swift has an elegant solution to equality. The [Equatable](https://developer.app
 static func == (lhs: Self, rhs: Self) -> Bool
 ```
 
-To make your type *equatable*, you declare that it conforms to the `Equatable` protocol:
+To make your type _equatable_, you declare that it conforms to the `Equatable` protocol:
 
 ```swift
 struct TwoDPoint: Equatable {
@@ -294,21 +294,21 @@ extension TwoDPoint: Equatable {
 }
 ```
 
-It normally doesn't make sense to compare variables that are not *values*, and for values you should use a value type such as `struct` or `enum`, so if you find yourself hand-implementing `==` it's time to think about how you got there.
+It normally doesn't make sense to compare variables that are not _values_, and for values you should use a value type such as `struct` or `enum`, so if you find yourself hand-implementing `==` it's time to think about how you got there.
 
 Note there are no null checks in `==` above. Swift separates the concerns of nullability and references. So by the time your class' `==` function is called, the null check has already been done.
 
 ## Conclusion
 
-I hope I've demonstrated that a typical object-oriented approach to value comparisons quickly gives rise to a whole lot of unnecessary issues. Partly due to being object-oriented, but also due to being overly generic. For example, the C# solution requires that the programmer implement an equality comparison against *any other* type of object, including nulls, when the 99% *actual, concrete use case* is that we want to compare *non-null values of the same type*.
+I hope I've demonstrated that a typical object-oriented approach to value comparisons quickly gives rise to a whole lot of unnecessary issues. Partly due to being object-oriented, but also due to being overly generic. For example, the C# solution requires that the programmer implement an equality comparison against _any other_ type of object, including nulls, when the 99% _actual, concrete use case_ is that we want to compare _non-null values of the same type_.
 
 Swift absolutely nails the 99% use case:
 
-* No boilerplate
-* `Equatable` only applies to the specific type that's declared conformant
-* Neither side of the `==` sign is special
-* No need to check nulls
-* Tedious code is automatically generated
+- No boilerplate
+- `Equatable` only applies to the specific type that's declared conformant
+- Neither side of the `==` sign is special
+- No need to check nulls
+- Tedious code is automatically generated
 
 What wasn't immediately obvious though as we got into the specifics of equality, is that equality is only one basic data transform, and our findings can be extrapolated to cover all kinds of data transforms.
 
