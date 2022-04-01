@@ -80,7 +80,7 @@ BLOG POSTS
 <p>For types passed by reference, such as classes in Java, C#, Swift, Objective-C and so on, it&rsquo;s extremely complicated. Sometimes we care about equality (two reference point to different objects, but those objects contain the same values) and sometimes we care about identity (two references point to the same object.)</p>
 <h2 id=properties-of-equatability>Properties of equatability</h2>
 <p>There are a few properties of equatability that we can consider to help us recognise whether a language has a good quality equality solution, or not.</p>
-<h3 id=equals-expressions-should-be-commutative>Equals expressions should be <em>commutative</em></h3>
+<h3 id=equals-expressions-should-be-_commutative_>Equals expressions should be <em>commutative</em></h3>
 <p>That is, &ldquo;is A equal to B?&rdquo; should always evaluate to the same boolean value as &ldquo;is B equal to A?&rdquo; How does that square with a typical OO solution to equality, where you have to compare values like the following snippet?</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-swift data-lang=swift>a.equals(b)
 </code></pre></div><p>By giving the left-hand value in the comparison a special role &ndash; i.e., the calculator of the result &ndash; if we were to reverse the order of <code>a</code> and <code>b</code>, we could then be calling the equals method of a completely different type! In that case, there is no guarantee of commutativity.</p>
@@ -297,7 +297,7 @@ BLOG POSTS
 <li><a href=#introduction>Introduction</a></li>
 <li><a href=#properties-of-equatability>Properties of equatability</a>
 <ul>
-<li><a href=#equals-expressions-should-be-commutative>Equals expressions should be <em>commutative</em></a></li>
+<li><a href=#equals-expressions-should-be-_commutative_>Equals expressions should be <em>commutative</em></a></li>
 <li><a href=#values-can-only-be-equal-if-they-are-of-the-same-type>Values can only be equal if they are of the same type</a></li>
 <li><a href=#null-references>Null references</a></li>
 </ul>
