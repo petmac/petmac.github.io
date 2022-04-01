@@ -147,9 +147,11 @@ To override `System.Object.Equals`, it appears to be best practice to do a run-t
 
 As opposed to the call being clear and unambiguous, we rely on language-lawyer knowledge to know which `Equals` method we're calling into. We're not recursing into the same method again, we're calling a *different* `Equals` method.
 
-To paraphrase [Dr. Venkat Subramaniam](https://twitter.com/venkat_s):
+> There are two ways of constructing a software design. One way is to make it so simple that there are **obviously** no deficiencies. And the other way is to make it so complicated that there are no **obvious** deficiencies.
+>
+> -- [Tony Hoare](https://wiki.c2.com/?TwoWaysToDesign)
 
-Strive to write code which has *obviously no problems*, rather than code which has *no obvious problems.*
+(Thank you [Dr. Venkat Subramaniam](https://twitter.com/venkat_s) for clarifying the author of the above quote.)
 
 ### `IEquatable<T>.Equals` implementation
 
