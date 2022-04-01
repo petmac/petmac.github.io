@@ -2,29 +2,29 @@
 <head>
 <meta charset=utf-8>
 <meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>Strong and Weak Object References | Peter Mackay</title>
+<title>Removing Reference Cycles | Peter Mackay</title>
 <meta name=viewport content="width=device-width,minimum-scale=1">
-<meta name=description content="Introduction An object maintains a reference/pointer to another object so it can call a method or access a property. References are called strong if the relationship between the objects is one of ownership, and weak or unowned if it the object containing the reference does not own the object being referred to.
-In languages like Swift, Objective-C, and C++, it’s required that we don’t create cycles of strong references, or we get memory leaks.">
+<meta name=description content="Context If you are gainfully employed as a programmer, you have probably been forced to accept object-oriented programming into your life. When working with a language like Swift or C++ which doesn&rsquo;t have garbage collection, you will end up in the debugger, trying to locate a strong reference cycle which has resulted in a memory leak.
+Or, you&rsquo;re reviewing a Pull Request and notice that there is a cyclic relationship between some classes.">
 <meta name=generator content="Hugo 0.91.2">
 <meta name=robots content="noindex, nofollow">
 <link rel=stylesheet href=/ananke/css/main.min.css>
-<meta property="og:title" content="Strong and Weak Object References">
-<meta property="og:description" content="Introduction An object maintains a reference/pointer to another object so it can call a method or access a property. References are called strong if the relationship between the objects is one of ownership, and weak or unowned if it the object containing the reference does not own the object being referred to.
-In languages like Swift, Objective-C, and C++, it’s required that we don’t create cycles of strong references, or we get memory leaks.">
+<meta property="og:title" content="Removing Reference Cycles">
+<meta property="og:description" content="Context If you are gainfully employed as a programmer, you have probably been forced to accept object-oriented programming into your life. When working with a language like Swift or C++ which doesn&rsquo;t have garbage collection, you will end up in the debugger, trying to locate a strong reference cycle which has resulted in a memory leak.
+Or, you&rsquo;re reviewing a Pull Request and notice that there is a cyclic relationship between some classes.">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://petmac.dev/how-to-code/strong-and-weak-object-refs/"><meta property="article:section" content="how-to-code">
-<meta property="article:published_time" content="2022-03-17T23:46:18+00:00">
-<meta property="article:modified_time" content="2022-03-17T23:46:18+00:00">
-<meta itemprop=name content="Strong and Weak Object References">
-<meta itemprop=description content="Introduction An object maintains a reference/pointer to another object so it can call a method or access a property. References are called strong if the relationship between the objects is one of ownership, and weak or unowned if it the object containing the reference does not own the object being referred to.
-In languages like Swift, Objective-C, and C++, it’s required that we don’t create cycles of strong references, or we get memory leaks."><meta itemprop=datePublished content="2022-03-17T23:46:18+00:00">
-<meta itemprop=dateModified content="2022-03-17T23:46:18+00:00">
-<meta itemprop=wordCount content="389">
+<meta property="og:url" content="https://petmac.dev/posts/removing-ref-cycles/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-03-17T23:47:10+00:00">
+<meta property="article:modified_time" content="2022-03-17T23:47:10+00:00">
+<meta itemprop=name content="Removing Reference Cycles">
+<meta itemprop=description content="Context If you are gainfully employed as a programmer, you have probably been forced to accept object-oriented programming into your life. When working with a language like Swift or C++ which doesn&rsquo;t have garbage collection, you will end up in the debugger, trying to locate a strong reference cycle which has resulted in a memory leak.
+Or, you&rsquo;re reviewing a Pull Request and notice that there is a cyclic relationship between some classes."><meta itemprop=datePublished content="2022-03-17T23:47:10+00:00">
+<meta itemprop=dateModified content="2022-03-17T23:47:10+00:00">
+<meta itemprop=wordCount content="467">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="Strong and Weak Object References">
-<meta name=twitter:description content="Introduction An object maintains a reference/pointer to another object so it can call a method or access a property. References are called strong if the relationship between the objects is one of ownership, and weak or unowned if it the object containing the reference does not own the object being referred to.
-In languages like Swift, Objective-C, and C++, it’s required that we don’t create cycles of strong references, or we get memory leaks.">
+<meta name=twitter:title content="Removing Reference Cycles">
+<meta name=twitter:description content="Context If you are gainfully employed as a programmer, you have probably been forced to accept object-oriented programming into your life. When working with a language like Swift or C++ which doesn&rsquo;t have garbage collection, you will end up in the debugger, trying to locate a strong reference cycle which has resulted in a memory leak.
+Or, you&rsquo;re reviewing a Pull Request and notice that there is a cyclic relationship between some classes.">
 </head>
 <body class="ma0 avenir bg-near-white">
 <header>
@@ -37,8 +37,8 @@ Peter Mackay
 <div class="flex-l items-center">
 <ul class="pl0 mr3">
 <li class="list f5 f4-ns fw4 dib pr3">
-<a class="hover-white no-underline white-90" href=/how-to-code/ title="How to Code page">
-How to Code
+<a class="hover-white no-underline white-90" href=/posts/ title="Posts page">
+Posts
 </a>
 </li>
 </ul>
@@ -63,42 +63,96 @@ How to Code
 <article class="flex-l flex-wrap justify-between mw8 center ph3">
 <header class="mt4 w-100">
 <aside class="instapaper_ignoref b helvetica tracked">
-HOW TO CODE
+POSTS
 </aside>
 <div id=sharing class="mt3 ananke-socials">
-<a href="https://twitter.com/share?url=https://petmac.dev/how-to-code/strong-and-weak-object-refs/&text=Strong%20and%20Weak%20Object%20References" class="ananke-social-link twitter no-underline" aria-label="share on Twitter">
+<a href="https://twitter.com/share?url=https://petmac.dev/posts/removing-ref-cycles/&text=Removing%20Reference%20Cycles" class="ananke-social-link twitter no-underline" aria-label="share on Twitter">
 <span class=icon><svg style="enable-background:new 0 0 67 67" viewBox="0 0 67 67" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167 22.283c-2.619.953-4.274 3.411-4.086 6.101l.063 1.038-1.048-.127c-3.813-.487-7.145-2.139-9.974-4.915l-1.383-1.377-.356 1.017c-.754 2.267-.272 4.661 1.299 6.271.838.89.649 1.017-.796.487-.503-.169-.943-.296-.985-.233-.146.149.356 2.076.754 2.839.545 1.06 1.655 2.097 2.871 2.712l1.027.487-1.215.021c-1.173.0-1.215.021-1.089.467.419 1.377 2.074 2.839 3.918 3.475l1.299.444-1.131.678c-1.676.976-3.646 1.526-5.616 1.568C19.775 43.256 19 43.341 19 43.405c0 .211 2.557 1.397 4.044 1.864 4.463 1.377 9.765.783 13.746-1.568 2.829-1.673 5.657-5 6.978-8.221.713-1.716 1.425-4.851 1.425-6.354.0-.975.063-1.102 1.236-2.267.692-.678 1.341-1.419 1.467-1.631.21-.403.188-.403-.88-.043-1.781.636-2.033.551-1.152-.402.649-.678 1.425-1.907 1.425-2.267.0-.063-.314.042-.671.233-.377.212-1.215.53-1.844.72l-1.131.361-1.027-.7c-.566-.381-1.361-.805-1.781-.932C39.766 21.902 38.131 21.944 37.167 22.283zM33 64C16.432 64 3 50.569 3 34S16.432 4 33 4s30 13.431 30 30S49.568 64 33 64z" style="fill-rule:evenodd;clip-rule:evenodd"/></svg>
 </span>
 </a>
 </div>
-<h1 class="f1 athelas mt3 mb1">Strong and Weak Object References</h1>
-<time class="f6 mv4 dib tracked" datetime=2022-03-17T23:46:18Z>March 17, 2022</time>
+<h1 class="f1 athelas mt3 mb1">Removing Reference Cycles</h1>
+<time class="f6 mv4 dib tracked" datetime=2022-03-17T23:47:10Z>March 17, 2022</time>
 </header>
-<div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h1 id=introduction>Introduction</h1>
-<p>An object maintains a reference/pointer to another object so it can call a method or access a property. References are called <em>strong</em> if the relationship between the objects is one of ownership, and <em>weak</em> or <em>unowned</em> if it the object containing the reference does not own the object being referred to.</p>
-<p>In languages like Swift, Objective-C, and C++, it’s required that we don’t create <em>cycles</em> of strong references, or we get memory leaks.</p>
-<p>A cycle is when an object &ldquo;A&rdquo; points directly or indirectly to another object &ldquo;B&rdquo;, and object &ldquo;B&rdquo; points directly or indirectly back to object &ldquo;A&rdquo;.</p>
-<p>Potential for bugs aside, creating cycles also suggests that the design is somewhat inelegant. We know that architecting a perfect arrangement of objects is not a goal, but we are often drawn into this conundrum by the use of OOP.</p>
-<p><strong>Stop using OOP, stop solving OOP-specific problems.</strong></p>
-<p>Let&rsquo;s find a way to help decide if a reference should be strong or weak.</p>
-<h1 id=types-of-reference>Types of reference</h1>
-<p>We tend to find that references to objects fall into 3 categories of purpose:</p>
-<ul>
-<li>&ldquo;A&rdquo; tells &ldquo;B&rdquo; to do something (e.g., &ldquo;A&rdquo; calls a method on &ldquo;B&rdquo;)</li>
-<li>&ldquo;A&rdquo; asks &ldquo;B&rdquo; for information (e.g., &ldquo;A&rdquo; accesses a property of &ldquo;B&rdquo;)</li>
-<li>&ldquo;A&rdquo; tells &ldquo;B&rdquo; that something happened (e.g., &ldquo;B&rdquo; is an observer of &ldquo;A&rdquo;)</li>
-</ul>
-<p>Is there an odd one out?</p>
-<p>In the first two categories, if object &ldquo;B&rdquo; isn&rsquo;t there, the code cannot function. In other words, if &ldquo;A&rdquo; depends on &ldquo;B&rdquo; to get its work done, and &ldquo;A&rdquo; can’t communicate with &ldquo;B&rdquo;, then &ldquo;A&rdquo; cannot do its work.</p>
-<p>The latter category is different though, in that &ldquo;A&rdquo;&rsquo;s work <em>can still succeed</em>, even when it is not observed by &ldquo;B&rdquo;.</p>
+<div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h1 id=context>Context</h1>
+<p>If you are gainfully employed as a programmer, you have probably been forced to accept object-oriented programming into your life. When working with a language like Swift or C++ which doesn&rsquo;t have garbage collection, you will end up in the debugger, trying to locate a strong reference cycle which has resulted in a memory leak.</p>
+<p>Or, you&rsquo;re reviewing a Pull Request and notice that there is a cyclic relationship between some classes.</p>
+<p>It&rsquo;s good to have some coping strategies for such events. Let&rsquo;s work through an example.</p>
+<h1 id=the-setup>The setup</h1>
 <blockquote>
-<p>If a tree falls in a forest and no one is around to hear it, does it make a sound?</p>
+<p>Based on a true story</p>
 </blockquote>
-<p>Given that maintaining a reference to an observer is essentially <em>optional</em>, we should strive to make all references in first two categories <strong>strong</strong>, and references that fall into the latter category <strong>weak</strong>.</p>
-<p>That way, in the common case where there is cyclic data flow from a controller object to a worker and back again, there isn&rsquo;t a strong reference cycle preventing the objects from being properly freed.</p>
-<h1 id=summary>Summary</h1>
-<p>References to objects that <em>do stuff</em> should be <strong>strong</strong>.</p>
-<p>References to objects that <em>observe stuff</em> should be <strong>weak</strong>.</p>
+<p>Let&rsquo;s look at the code:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-swift data-lang=swift><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>WebView</span> {
+  <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>let</span> messageHandler = MessageHandler()
+  <span style=color:#66d9ef>var</span> config = Config()
+
+  <span style=color:#66d9ef>init</span>() {
+    <span style=color:#75715e>// Shares mutable state, but not only that...</span>
+    <span style=color:#75715e>// Creates a strong reference cycle</span>
+    messageHandler.webView = <span style=color:#66d9ef>self</span>
+  }
+}
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MessageHandler</span> {
+  <span style=color:#66d9ef>var</span> webView: WebView? <span style=color:#75715e>// Strong reference</span>
+
+  <span style=color:#66d9ef>func</span> <span style=color:#a6e22e>doStuff</span>() {
+    <span style=color:#66d9ef>guard</span> <span style=color:#66d9ef>let</span> config = webView?.config <span style=color:#66d9ef>else</span> {
+      <span style=color:#75715e>// Should never happen, is almost certainly untested</span>
+      <span style=color:#66d9ef>return</span>
+    }
+
+    <span style=color:#75715e>// Do something with config</span>
+  }
+}
+</code></pre></div><p>We have a strong reference cycle between the <code>WebView</code> and <code>MessageHandler</code> classes. <code>WebView</code> is the main object in this module. It owns a <code>MessageHandler</code>, and the <code>MessageHandler</code> depends on the <code>WebView</code> to provide its configuration.</p>
+<p>Due to the strong reference cycle, there’s going to be a memory leak when we try to release the <code>WebView</code>.</p>
+<p>As if that’s not bad enough, <code>WebView</code> has multiple roles: it views webs but <em>also</em> provides <code>Config</code>s, and thus is an egregious violation of the <em>single responsibility principle</em>.</p>
+<h1 id=weak-to-the-rescue><code>weak</code> to the rescue?</h1>
+<p>One might be tempted to change the reference in <code>MessageHandler</code> to the <code>WebView</code> to be weak. This would work around the memory leak problem, but it means that:</p>
+<ul>
+<li><code>doStuff()</code> needs to check <code>config</code> and do something unusual if it&rsquo;s nil</li>
+<li>There’s still a cycle of access between the two classes</li>
+<li><code>WebView</code> is still providing <code>Config</code>s</li>
+</ul>
+<h1 id=store-that-shared-mutable-state>Store that shared mutable state</h1>
+<p>What I would do instead is move the <code>config</code> property to a new <code>ConfigStore</code> class, which both <code>WebView</code> and <code>MessageHandler</code> will share.</p>
+<p>This is 💀 <strong>shared mutable state</strong> 💀, but that&rsquo;s OK, because sharing mutable state is <em>exactly</em> what classes are for!</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-swift data-lang=swift><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ConfigStore</span> {
+  <span style=color:#66d9ef>var</span> config = Config()
+}
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>WebView</span> {
+  <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>let</span> configStore: ConfigStore
+  <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>let</span> messageHandler: MessageHandler
+
+  <span style=color:#66d9ef>init</span>() {
+    configStore = ConfigStore()
+    messageHandler = MessageHandler(configStore: configStore)
+  }
+}
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MessageHandler</span> {
+  <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>let</span> configStore: ConfigStore
+
+  <span style=color:#66d9ef>init</span>(configStore: ConfigStore) {
+    <span style=color:#66d9ef>self</span>.configStore = configStore
+  }
+
+  <span style=color:#66d9ef>func</span> <span style=color:#a6e22e>doStuff</span>() {
+    <span style=color:#66d9ef>let</span> config = configStore.config <span style=color:#75715e>// Config cannot be nil</span>
+    <span style=color:#75715e>// Do something with config</span>
+  }
+}
+</code></pre></div><h1 id=result>Result</h1>
+<ul>
+<li>Shared mutable state is isolated in the <code>Store</code> class</li>
+<li><code>WebView</code> no longer has multiple roles (does not provide <code>Config</code>s)</li>
+<li>More stuff can be made <code>private</code></li>
+<li>Things which previously “should never” be nil now <em>cannot</em> be nil</li>
+<li>No reference cycles at all, not even weak ones</li>
+</ul>
 <ul class=pa0>
 </ul>
 <div class="mt6 instapaper_ignoref">
