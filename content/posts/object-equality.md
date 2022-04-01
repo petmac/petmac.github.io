@@ -11,7 +11,7 @@ type: "post"
 
 ## Introduction
 
-One of the first code smells we encounter when working with an object-oriented language where everything is an *object*, or everything subclasses an common base class, or there are no static methods, is how OOP typically handles equality of objects.
+One of the first code smells we encounter when working with an object-oriented language where everything is an *object*, or everything subclasses a common base class, or there are no static methods, is how OOP typically handles equality of objects.
 
 For value types such as integers and floating point numbers, it's not controversial that we should be able to compare them and decide if they're equal or not. Integers can be compared by bits, and data structures can be compared by descending into the structure and comparing elements.
 
@@ -199,7 +199,7 @@ Finally, after a dozen lines of boilerplate, we reach the actual comparison:
 return (X == p.X) && (Y == p.Y);
 ```
 
-The programmer has to check the individual fields and not make any copy and paste errors. If new fields are added, this code *must* be updated. That's not ideal, but fairly standard when the compiler cannot generate the comparison code for us:
+The programmer has to check the individual fields and not make any copy and paste errors. If new fields are added, this code *must* be updated. That's not ideal, but fairly standard when the compiler cannot generate the comparison code for us.
 
 There is another lurking footgun, where we must be absolutely sure not to call into a base class, or risk infinite recursion, or inadvertently performing reference equality.
 
