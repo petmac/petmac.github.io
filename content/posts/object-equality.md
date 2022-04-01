@@ -294,6 +294,8 @@ extension TwoDPoint: Equatable {
 
 It normally doesn't make sense to compare variables that are not *values*, and for values you should use a value type such as `struct` or `enum`, so if you find yourself hand-implementing `==` it's time to think about how you got there.
 
+Note there are no null checks in `==` above. Swift separates the concerns of nullability and references. So by the time your class' `==` function is called, the null check has already been done.
+
 ## Conclusion
 
 I hope I've demonstrated that a typical object-oriented approach to value comparisons quickly gives rise to a whole lot of unnecessary issues. Partly due to being object-oriented, but also due to being overly generic. For example, the C# solution requires that the programmer implement an equality comparison against *any other* type of object, including nulls, when the 99% *actual, concrete use case* is that we want to compare *non-null values of the same type*.
