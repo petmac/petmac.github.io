@@ -20,7 +20,7 @@ For value types such as integers and floating point numbers, it&rsquo;s not cont
 <meta itemprop=description content="Introduction One of the first code smells we encounter when working with an object-oriented language where everything is an object, or everything subclasses a common base class, or there are no static methods, is how OOP typically handles equality of objects.
 For value types such as integers and floating point numbers, it&rsquo;s not controversial that we should be able to compare them and decide if they&rsquo;re equal or not. Integers can be compared by bits, and data structures can be compared by descending into the structure and comparing elements."><meta itemprop=datePublished content="2022-04-01T15:26:29+00:00">
 <meta itemprop=dateModified content="2022-04-01T15:26:29+00:00">
-<meta itemprop=wordCount content="1974">
+<meta itemprop=wordCount content="2008">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Object Equality">
 <meta name=twitter:description content="Introduction One of the first code smells we encounter when working with an object-oriented language where everything is an object, or everything subclasses a common base class, or there are no static methods, is how OOP typically handles equality of objects.
@@ -264,6 +264,7 @@ BLOG POSTS
     }
 }
 </code></pre></div><p>It normally doesn&rsquo;t make sense to compare variables that are not <em>values</em>, and for values you should use a value type such as <code>struct</code> or <code>enum</code>, so if you find yourself hand-implementing <code>==</code> it&rsquo;s time to think about how you got there.</p>
+<p>Note there are no null checks in <code>==</code> above. Swift separates the concerns of nullability and references. So by the time your class' <code>==</code> function is called, the null check has already been done.</p>
 <h2 id=conclusion>Conclusion</h2>
 <p>I hope I&rsquo;ve demonstrated that a typical object-oriented approach to value comparisons quickly gives rise to a whole lot of unnecessary issues. Partly due to being object-oriented, but also due to being overly generic. For example, the C# solution requires that the programmer implement an equality comparison against <em>any other</em> type of object, including nulls, when the 99% <em>actual, concrete use case</em> is that we want to compare <em>non-null values of the same type</em>.</p>
 <p>Swift absolutely nails the 99% use case:</p>
