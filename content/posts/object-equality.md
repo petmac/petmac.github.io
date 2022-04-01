@@ -143,7 +143,7 @@ This class is a container for 8 bytes. We're going to do a *lot* of work to comp
 public override bool Equals(object obj) => this.Equals(obj as TwoDPoint);
 ```
 
-To override `System.Object.Equals`, it appears to be best practice to do a run-time cast of `obj` to our class type, which will result in either a reference to our class, or reference to a subclass, or a null pointer, and thne we pass that into a different, more specific, `Equals` method to do the work.
+To override `System.Object.Equals`, it appears to be best practice to do a run-time cast of `obj` to our class type, which will result in either a reference to our class, or reference to a subclass, or a null pointer, and then we pass that into a different, more specific, `Equals` method to do the work.
 
 As opposed to the call being clear and unambiguous, we rely on language-lawyer knowledge to know which `Equals` method we're calling into. We're not recursing into the same method again, we're calling a *different* `Equals` method.
 
