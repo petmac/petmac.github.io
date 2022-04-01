@@ -41,8 +41,8 @@ Peter Mackay
 <div class="flex-l items-center">
 <ul class="pl0 mr3">
 <li class="list f5 f4-ns fw4 dib pr3">
-<a class="hover-white no-underline white-90" href=/posts/ title="Posts page">
-Posts
+<a class="hover-white no-underline white-90" href=/posts/ title="Blog Posts page">
+Blog Posts
 </a>
 </li>
 </ul>
@@ -67,7 +67,7 @@ Posts
 <article class="flex-l flex-wrap justify-between mw8 center ph3">
 <header class="mt4 w-100">
 <aside class="instapaper_ignoref b helvetica tracked">
-POSTS
+BLOG POSTS
 </aside>
 <div id=sharing class="mt3 ananke-socials">
 <a href="https://twitter.com/share?url=https://petmac.dev/posts/solid/&text=The%20SOLID%20Principles" class="ananke-social-link twitter no-underline" aria-label="share on Twitter">
@@ -78,18 +78,18 @@ POSTS
 <h1 class="f1 athelas mt3 mb1">The SOLID Principles</h1>
 <time class="f6 mv4 dib tracked" datetime=2022-03-17T23:45:28Z>March 17, 2022</time>
 </header>
-<div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h1 id=introduction>Introduction</h1>
+<div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h2 id=introduction>Introduction</h2>
 <p>In order to guide programmers to effectively apply object-oriented design, the industry settled on what we call <a href=https://en.wikipedia.org/wiki/SOLID>the SOLID principles</a>.</p>
 <p>I believe that while the SOLID principles were marketed to encourage “good” use of OOP, they just as effectively <em>discourage</em> the use of OOP!</p>
-<h1 id=the-principles>The principles</h1>
-<h2 id=single-responsibility-principle>Single responsibility principle</h2>
+<h2 id=the-principles>The principles</h2>
+<h3 id=single-responsibility-principle>Single responsibility principle</h3>
 <blockquote>
 <p>every module, class or function in a computer program should have responsibility over a single part of that program&rsquo;s functionality, and it should encapsulate that part.</p>
 </blockquote>
 <p>If a class has more than one public function, then it does more than one thing. Therefore, and I know I&rsquo;m reducing to absurdity here, should each class only have one public function in it? And if so, what is the benefit in wrapping the function in a container class?</p>
 <p>I say that OOP, through the bundling of functions into classes, pushes the programmer to violate the single responsibility principle.</p>
 <p>The most effective way to make something have a single responsibility is to decouple it from everything else. In other words, don’t write classes, write free functions instead.</p>
-<h2 id=open-closed-principle>Open-closed principle</h2>
+<h3 id=open-closed-principle>Open-closed principle</h3>
 <blockquote>
 <p>an entity can allow its behaviour to be extended without modifying its source code.</p>
 </blockquote>
@@ -98,13 +98,13 @@ POSTS
 <p>If, rather than a class, you just have a function, then you can extend its behaviour by merely calling another function after the first one completes. If you have to <em>change</em> the functionality, then you need to modify or replace the first function.</p>
 <p>Even if staying within the realm of OOP, Swift can generally do way better than extension via subclassing, through use of its <code>extension</code> mechanism.</p>
 <p>It&rsquo;s almost like this principle is from a fantasy realm where people don&rsquo;t want to read or modify existing source code. In reality you need to both read and modify existing source code <em>all the time</em>. Changing or extending functionality by layering more stuff on top by definition leads to layers of wrappers.</p>
-<h2 id=liskov-substitution-principle>Liskov substitution principle</h2>
+<h3 id=liskov-substitution-principle>Liskov substitution principle</h3>
 <blockquote>
 <p>an object (such as a class) and a sub-object (such as a class that extends the first class) must be interchangeable without breaking the program.</p>
 </blockquote>
 <p>In practice, we subclass in order to <em>change</em> a base class behaviour rather than inherit it. And in that way, we’re violating both this principle (that a base class and subclass are interchangeable) <em>and</em> the <em>open-closed principle</em>.</p>
 <p>Inheritance is nowadays generally frowned upon as a mechanism for code reuse, making this guideline feel somewhat based on a false premise.</p>
-<h2 id=dependency-inversion-principle>Dependency inversion principle</h2>
+<h3 id=dependency-inversion-principle>Dependency inversion principle</h3>
 <blockquote>
 <p>depend on abstractions (e.g., interfaces).</p>
 </blockquote>
@@ -117,7 +117,7 @@ POSTS
 </ul>
 <p>In each case, that dependency can be satisfied through use of a closure, block, or function pointer. There is no need to create an interface, protocol or abstract base class.</p>
 <p>Even if you have to use OOP, Swift can do better than Java-esque interfaces. You can extend classes, structs, and even value types to declare conformance to an interface using protocols. Not only that, but you can extend <em>existing</em> classes. That&rsquo;s exemplifying the <em>open-closed principle</em>!</p>
-<h2 id=interface-segregation-principle>Interface segregation principle</h2>
+<h3 id=interface-segregation-principle>Interface segregation principle</h3>
 <blockquote>
 <p>no code should be forced to depend on methods it does not use.</p>
 </blockquote>
@@ -135,7 +135,23 @@ POSTS
 <div class="mt6 instapaper_ignoref">
 </div>
 </div>
-<aside class="w-30-l mt6-l">
+<aside class="w-30-l mt6-l"><div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+<p class="f5 b mb3">What's in this post</p>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#introduction>Introduction</a></li>
+<li><a href=#the-principles>The principles</a>
+<ul>
+<li><a href=#single-responsibility-principle>Single responsibility principle</a></li>
+<li><a href=#open-closed-principle>Open-closed principle</a></li>
+<li><a href=#liskov-substitution-principle>Liskov substitution principle</a></li>
+<li><a href=#dependency-inversion-principle>Dependency inversion principle</a></li>
+<li><a href=#interface-segregation-principle>Interface segregation principle</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
 </aside>
 </article>
 </main>

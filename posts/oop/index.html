@@ -45,8 +45,8 @@ Peter Mackay
 <div class="flex-l items-center">
 <ul class="pl0 mr3">
 <li class="list f5 f4-ns fw4 dib pr3">
-<a class="hover-white no-underline white-90" href=/posts/ title="Posts page">
-Posts
+<a class="hover-white no-underline white-90" href=/posts/ title="Blog Posts page">
+Blog Posts
 </a>
 </li>
 </ul>
@@ -71,7 +71,7 @@ Posts
 <article class="flex-l flex-wrap justify-between mw8 center ph3">
 <header class="mt4 w-100">
 <aside class="instapaper_ignoref b helvetica tracked">
-POSTS
+BLOG POSTS
 </aside>
 <div id=sharing class="mt3 ananke-socials">
 <a href="https://twitter.com/share?url=https://petmac.dev/posts/oop/&text=Object-oriented%20Programming%20%28OOP%29" class="ananke-social-link twitter no-underline" aria-label="share on Twitter">
@@ -82,13 +82,13 @@ POSTS
 <h1 class="f1 athelas mt3 mb1">Object-oriented Programming (OOP)</h1>
 <time class="f6 mv4 dib tracked" datetime=2022-03-17T16:58:12Z>March 17, 2022</time>
 </header>
-<div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h1 id=what-is-oop>What is OOP?</h1>
+<div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h2 id=what-is-oop>What is OOP?</h2>
 <p>First, read <a href=https://en.wikipedia.org/wiki/Object-oriented_programming>Wikipedia</a>.</p>
-<h1 id=characteristics-of-oop>Characteristics of OOP</h1>
-<h2 id=division-of-the-problem-into-objects-which-implement-classes>Division of the problem into Objects which implement Classes</h2>
+<h2 id=characteristics-of-oop>Characteristics of OOP</h2>
+<h3 id=division-of-the-problem-into-objects-which-implement-classes>Division of the problem into Objects which implement Classes</h3>
 <p>The programmer is able to model the problem space in terms of objects that talk to each other via messages (method calls.)</p>
 <p>I believe this to be a poor approach to most data transformation problems.</p>
-<h3 id=noun-ification>Noun-ification</h3>
+<h4 id=noun-ification>Noun-ification</h4>
 <p>To encapsulate with OOP, you have to invent <em>names</em> (nouns) for the classes which encapsulate the <em>functionality</em> (verbs). In many cases this is quite difficult, and you end up with names that don&rsquo;t succinctly but completely summarise the functionality being encapsulated.</p>
 <p>For example, let&rsquo;s say you have some code to perform an HTTP request to send a login request (a <code>POST</code>) to your company&rsquo;s REST API. It&rsquo;s easy to invent a function name for this:</p>
 <ul>
@@ -103,9 +103,9 @@ POSTS
 <li>Session manager? Same</li>
 </ul>
 <p>I&rsquo;m not great at naming, but I feel that naming should be something that programmers can do in their sleep. Looking at any OOP codebase, that&rsquo;s simply not the case.</p>
-<h3 id=accidental-complexity>Accidental complexity</h3>
+<h4 id=accidental-complexity>Accidental complexity</h4>
 <p>By writing this “architecture” code that does not directly address the data transformation problems at hand, we have burdened ourselves with accidental complexity and latent problems that will at some point prevent us from solving the actual problems we have.</p>
-<h3 id=many-sources-of-truth>Many sources of truth</h3>
+<h4 id=many-sources-of-truth>Many sources of truth</h4>
 <p>Breaking an app up into smaller communicating objects by definition scatters the state of the application across its codebase. It becomes hard to observe and reason about the state of the application.</p>
 <p>According to accepted good practice an object should have a limited view of the world and little internal state (to limit the problem space for each object), which then leads to the following slippery slope:</p>
 <ol>
@@ -115,24 +115,24 @@ POSTS
 <li>Codebase becomes more entangled</li>
 </ol>
 <p>Often a requirements change causes the programmer to decide between one or more quick fixes that introduce tech debt (e.g., give object A a reference to object B, or duplicate state and keep it in sync) or a difficult refactor of the object graph.</p>
-<h3 id=object-management>Object management</h3>
+<h4 id=object-management>Object management</h4>
 <p>Once the code is split into objects, the program needs to create and maintain the collection of objects, and the references in-between. Whole frameworks (Dependency Injection) have been created to try and remove the burden of object creation from the programmer.</p>
 <p>The dynamically allocated nature of object memory also gives rise to its own problems, such as strong reference cycles in languages which use reference counting to automatically free memory of unused objects.</p>
-<h2 id=inheritance>Inheritance</h2>
+<h3 id=inheritance>Inheritance</h3>
 <p>Extending/overriding/reusing a class behaviour via subclassing.</p>
 <p>When a class is subclassed, the exact behaviour of the code involved stops being clear. Behaviour is divided between the base class and any number of potential subclasses.</p>
 <p>From a code comprehension point of view, the programmer has to keep multiple classes in mind, and multiple files open in their editor, to fully grasp the big picture of how the program works.</p>
 <p>Overriding behaviour generally makes code difficult to follow, difficult to reason about, and leads to code smells such as empty overridden functions.</p>
 <p>For these reasons (and probably others), inheritance is nowadays generally frowned upon as a mechanism for code reuse.</p>
-<h1 id=non-characteristics-of-oop>Non-characteristics of OOP</h1>
+<h2 id=non-characteristics-of-oop>Non-characteristics of OOP</h2>
 <p>These are characteristics which are claimed as those of OOP, which are in fact available to programmers independently of OOP.</p>
-<h2 id=information-hiding>Information hiding</h2>
+<h3 id=information-hiding>Information hiding</h3>
 <p>The ability to prevent access to functions or data via visibility specifiers like public, internal, private, etc. Most languages have mechanisms for making things private to a module or file, so OOP does not grant this ability.</p>
-<h2 id=encapsulation>Encapsulation</h2>
+<h3 id=encapsulation>Encapsulation</h3>
 <p>The bundling of data with the functions that work with that data. Encapsulation is provided outside of OOP by way of modules.</p>
 <p>Inheritance (arguably OOP’s defining feature) works <em>against</em> encapsulation. <a href=https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)#Encapsulation_and_inheritance>Reference</a></p>
 <p>In many cases, problems are solved when we take data from one place, do something with it, and pass it to another. In that case, what is the point in making the data inaccessible, or accessible only via getters and so on?</p>
-<h1 id=how-did-oop-become-the-dominant-paradigm>How did OOP become the dominant paradigm?</h1>
+<h2 id=how-did-oop-become-the-dominant-paradigm>How did OOP become the dominant paradigm?</h2>
 <p>My experience of OOP was that it came to be popular first through Java, then other languages like C++ and C#.</p>
 <p>Java quickly gained popularity as it had a bunch of benefits, and attempted to tackle some big problems which existed in languages like C.</p>
 <ul>
@@ -150,12 +150,12 @@ POSTS
 <li>&mldr;</li>
 <li>Profit!</li>
 </ol>
-<h1 id=what-was-so-bad-about-java-and-pure-oop>What was so bad about Java and “pure” OOP?</h1>
+<h2 id=what-was-so-bad-about-java-and-pure-oop>What was so bad about Java and “pure” OOP?</h2>
 <p>Java had (past tense, as my Java experience is now outdated) a few very specific potentially harmful attributes.</p>
 <p>Java was not a multi-paradigm language. It did not allow the programmer to write functions outside of classes. Even static functions which had no dependencies had to be put in a class. Programmers forgot that functions can be put at module scope, and started putting everything in classes, even when that adds complexity. C# continued this limitation.</p>
 <p>There were no “data structure” types other than classes. This meant that data structures were generally mutable, and passed by reference. Programmers shared references to mutable state all over the place. We now all agree that shared mutable state is generally difficult to reason about, and that leads to bugs.</p>
 <p>Shared mutable state is also awful for concurrency, but that’s a topic for another day.</p>
-<h1 id=the-never-ending-plateau-of-learning-oop>The never-ending plateau of learning OOP</h1>
+<h2 id=the-never-ending-plateau-of-learning-oop>The never-ending plateau of learning OOP</h2>
 <p>Once OOP was established, there were a plethora of books written on the “right way” to architect OOP programs.</p>
 <p>From Design Patterns to Effective C++, there were a lot of rules to help you solve problems by way of increased mastery and adoption of OOP, as well as avoiding shooting yourself in the foot by learning all the language pitfalls.</p>
 <p>Should it be considered a “red flag” that a paradigm is not able to be effectively used without a large number of rules and guidelines?</p>
@@ -165,7 +165,7 @@ POSTS
 <p>Again, I didn&rsquo;t realise it, but it was almost like a cult where the only way to successfully use OOP was to pay to level up in OOP.</p>
 <p>Clean architecture was always just around the corner, but after trying for approximately 15 years I never actually got there.</p>
 <p>I’m not the only one who has arrived at this conclusion: Casey Muratori recorded <a href="https://www.youtube.com/watch?v=ZM1ZDaaEyMY">an excellent rant on the topic</a>. It&rsquo;s a short video and well worth your time.</p>
-<h1 id=where-is-oop-headed>Where is OOP headed?</h1>
+<h2 id=where-is-oop-headed>Where is OOP headed?</h2>
 <p>OOP’s defining feature (inheritance) is generally regarded to be a poor form of code reuse, and is to be avoided.</p>
 <p>Many languages that support OOP also have non-OOP features like closures, free functions, value types, and functional-style map/filter/flat-map, that sort of thing.</p>
 <p>Even UI toolkits, traditionally the most prominent application of OOP, are steering away from hierarchies of objects and towards declarative, functional approaches. For example:</p>
@@ -182,7 +182,30 @@ POSTS
 <div class="mt6 instapaper_ignoref">
 </div>
 </div>
-<aside class="w-30-l mt6-l">
+<aside class="w-30-l mt6-l"><div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+<p class="f5 b mb3">What's in this post</p>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#what-is-oop>What is OOP?</a></li>
+<li><a href=#characteristics-of-oop>Characteristics of OOP</a>
+<ul>
+<li><a href=#division-of-the-problem-into-objects-which-implement-classes>Division of the problem into Objects which implement Classes</a></li>
+<li><a href=#inheritance>Inheritance</a></li>
+</ul>
+</li>
+<li><a href=#non-characteristics-of-oop>Non-characteristics of OOP</a>
+<ul>
+<li><a href=#information-hiding>Information hiding</a></li>
+<li><a href=#encapsulation>Encapsulation</a></li>
+</ul>
+</li>
+<li><a href=#how-did-oop-become-the-dominant-paradigm>How did OOP become the dominant paradigm?</a></li>
+<li><a href=#what-was-so-bad-about-java-and-pure-oop>What was so bad about Java and “pure” OOP?</a></li>
+<li><a href=#the-never-ending-plateau-of-learning-oop>The never-ending plateau of learning OOP</a></li>
+<li><a href=#where-is-oop-headed>Where is OOP headed?</a></li>
+</ul>
+</nav>
+</div>
 </aside>
 </article>
 </main>

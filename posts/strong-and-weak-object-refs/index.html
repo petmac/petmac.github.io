@@ -37,8 +37,8 @@ Peter Mackay
 <div class="flex-l items-center">
 <ul class="pl0 mr3">
 <li class="list f5 f4-ns fw4 dib pr3">
-<a class="hover-white no-underline white-90" href=/posts/ title="Posts page">
-Posts
+<a class="hover-white no-underline white-90" href=/posts/ title="Blog Posts page">
+Blog Posts
 </a>
 </li>
 </ul>
@@ -63,7 +63,7 @@ Posts
 <article class="flex-l flex-wrap justify-between mw8 center ph3">
 <header class="mt4 w-100">
 <aside class="instapaper_ignoref b helvetica tracked">
-POSTS
+BLOG POSTS
 </aside>
 <div id=sharing class="mt3 ananke-socials">
 <a href="https://twitter.com/share?url=https://petmac.dev/posts/strong-and-weak-object-refs/&text=Strong%20and%20Weak%20Object%20References" class="ananke-social-link twitter no-underline" aria-label="share on Twitter">
@@ -74,14 +74,14 @@ POSTS
 <h1 class="f1 athelas mt3 mb1">Strong and Weak Object References</h1>
 <time class="f6 mv4 dib tracked" datetime=2022-03-17T23:46:18Z>March 17, 2022</time>
 </header>
-<div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h1 id=introduction>Introduction</h1>
+<div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h2 id=introduction>Introduction</h2>
 <p>An object maintains a reference/pointer to another object so it can call a method or access a property. References are called <em>strong</em> if the relationship between the objects is one of ownership, and <em>weak</em> or <em>unowned</em> if it the object containing the reference does not own the object being referred to.</p>
 <p>In languages like Swift, Objective-C, and C++, it’s required that we don’t create <em>cycles</em> of strong references, or we get memory leaks.</p>
 <p>A cycle is when an object &ldquo;A&rdquo; points directly or indirectly to another object &ldquo;B&rdquo;, and object &ldquo;B&rdquo; points directly or indirectly back to object &ldquo;A&rdquo;.</p>
 <p>Potential for bugs aside, creating cycles also suggests that the design is somewhat inelegant. We know that architecting a perfect arrangement of objects is not a goal, but we are often drawn into this conundrum by the use of OOP.</p>
 <p><strong>Stop using OOP, stop solving OOP-specific problems.</strong></p>
 <p>Let&rsquo;s find a way to help decide if a reference should be strong or weak.</p>
-<h1 id=types-of-reference>Types of reference</h1>
+<h2 id=types-of-reference>Types of reference</h2>
 <p>We tend to find that references to objects fall into 3 categories of purpose:</p>
 <ul>
 <li>&ldquo;A&rdquo; tells &ldquo;B&rdquo; to do something (e.g., &ldquo;A&rdquo; calls a method on &ldquo;B&rdquo;)</li>
@@ -96,7 +96,7 @@ POSTS
 </blockquote>
 <p>Given that maintaining a reference to an observer is essentially <em>optional</em>, we should strive to make all references in first two categories <strong>strong</strong>, and references that fall into the latter category <strong>weak</strong>.</p>
 <p>That way, in the common case where there is cyclic data flow from a controller object to a worker and back again, there isn&rsquo;t a strong reference cycle preventing the objects from being properly freed.</p>
-<h1 id=summary>Summary</h1>
+<h2 id=summary>Summary</h2>
 <p>References to objects that <em>do stuff</em> should be <strong>strong</strong>.</p>
 <p>References to objects that <em>observe stuff</em> should be <strong>weak</strong>.</p>
 <ul class=pa0>
@@ -104,7 +104,16 @@ POSTS
 <div class="mt6 instapaper_ignoref">
 </div>
 </div>
-<aside class="w-30-l mt6-l">
+<aside class="w-30-l mt6-l"><div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+<p class="f5 b mb3">What's in this post</p>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#introduction>Introduction</a></li>
+<li><a href=#types-of-reference>Types of reference</a></li>
+<li><a href=#summary>Summary</a></li>
+</ul>
+</nav>
+</div>
 </aside>
 </article>
 </main>
