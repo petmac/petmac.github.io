@@ -1,9 +1,15 @@
 ---
-title: "Strong and Weak Object References"
 date: 2022-03-17T23:46:18Z
+description: ""
+draft: false
+featured_image: ""
+tags: []
+title: "Strong and Weak Object References"
+toc: true
+type: "post"
 ---
 
-# Introduction
+## Introduction
 
 An object maintains a reference/pointer to another object so it can call a method or access a property. References are called _strong_ if the relationship between the objects is one of ownership, and _weak_ or _unowned_ if it the object containing the reference does not own the object being referred to.
 
@@ -17,7 +23,7 @@ Potential for bugs aside, creating cycles also suggests that the design is somew
 
 Let's find a way to help decide if a reference should be strong or weak.
 
-# Types of reference
+## Types of reference
 
 We tend to find that references to objects fall into 3 categories of purpose:
 
@@ -37,7 +43,7 @@ Given that maintaining a reference to an observer is essentially _optional_, we 
 
 That way, in the common case where there is cyclic data flow from a controller object to a worker and back again, there isn't a strong reference cycle preventing the objects from being properly freed.
 
-# Summary
+## Summary
 
 References to objects that _do stuff_ should be **strong**.
 

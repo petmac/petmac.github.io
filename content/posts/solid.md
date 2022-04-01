@@ -1,17 +1,23 @@
 ---
-title: "The SOLID Principles"
 date: 2022-03-17T23:45:28Z
+description: ""
+draft: false
+featured_image: ""
+tags: []
+title: "The SOLID Principles"
+toc: true
+type: "post"
 ---
 
-# Introduction
+## Introduction
 
 In order to guide programmers to effectively apply object-oriented design, the industry settled on what we call [the SOLID principles](https://en.wikipedia.org/wiki/SOLID).
 
 I believe that while the SOLID principles were marketed to encourage “good” use of OOP, they just as effectively *discourage* the use of OOP!
 
-# The principles
+## The principles
 
-## Single responsibility principle
+### Single responsibility principle
 
 > every module, class or function in a computer program should have responsibility over a single part of that program's functionality, and it should encapsulate that part.
 
@@ -21,7 +27,7 @@ I say that OOP, through the bundling of functions into classes, pushes the progr
 
 The most effective way to make something have a single responsibility is to decouple it from everything else. In other words, don’t write classes, write free functions instead.
 
-## Open-closed principle
+### Open-closed principle
 
 > an entity can allow its behaviour to be extended without modifying its source code.
 
@@ -35,7 +41,7 @@ Even if staying within the realm of OOP, Swift can generally do way better than 
 
 It's almost like this principle is from a fantasy realm where people don't want to read or modify existing source code. In reality you need to both read and modify existing source code *all the time*. Changing or extending functionality by layering more stuff on top by definition leads to layers of wrappers.
 
-## Liskov substitution principle
+### Liskov substitution principle
 
 > an object (such as a class) and a sub-object (such as a class that extends the first class) must be interchangeable without breaking the program.
 
@@ -43,7 +49,7 @@ In practice, we subclass in order to *change* a base class behaviour rather than
 
 Inheritance is nowadays generally frowned upon as a mechanism for code reuse, making this guideline feel somewhat based on a false premise.
 
-## Dependency inversion principle
+### Dependency inversion principle
 
 > depend on abstractions (e.g., interfaces).
 
@@ -59,7 +65,7 @@ In each case, that dependency can be satisfied through use of a closure, block, 
 
 Even if you have to use OOP, Swift can do better than Java-esque interfaces. You can extend classes, structs, and even value types to declare conformance to an interface using protocols. Not only that, but you can extend *existing* classes. That's exemplifying the *open-closed principle*!
 
-## Interface segregation principle
+### Interface segregation principle
 
 > no code should be forced to depend on methods it does not use.
 

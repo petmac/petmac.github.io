@@ -1,12 +1,18 @@
 ---
-title: "What is Programming?"
 date: 2022-03-17T16:22:11Z
+description: ""
+draft: false
+featured_image: ""
+tags: []
+title: "What is Programming?"
+toc: true
+type: "post"
 ---
-# Introduction
+## Introduction
 
 This page borrows heavily from [Mike Acton](https://twitter.com/mike_acton).
 
-# Transformation of data
+## Transformation of data
 
 Writing code is a means to solving a problem, and primarily the problem is that some data (input) needs to be transformed into something else (output).
 
@@ -30,7 +36,7 @@ Frequently the output is not only dependent on any particular input, but on some
 - Database or some other persistent store
 - Caches (low persistence store)
 
-# Programming
+## Programming
 
 Your job as a programmer is:
 

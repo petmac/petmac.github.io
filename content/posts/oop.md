@@ -1,21 +1,27 @@
 ---
-title: "Object-oriented Programming (OOP)"
 date: 2022-03-17T16:58:12Z
+description: ""
+draft: false
+featured_image: ""
+tags: []
+title: "Object-oriented Programming (OOP)"
+toc: true
+type: "post"
 ---
 
-# What is OOP?
+## What is OOP?
 
 First, read [Wikipedia](https://en.wikipedia.org/wiki/Object-oriented_programming).
 
-# Characteristics of OOP
+## Characteristics of OOP
 
-## Division of the problem into Objects which implement Classes
+### Division of the problem into Objects which implement Classes
 
 The programmer is able to model the problem space in terms of objects that talk to each other via messages (method calls.)
 
 I believe this to be a poor approach to most data transformation problems.
 
-### Noun-ification
+#### Noun-ification
 
 To encapsulate with OOP, you have to invent _names_ (nouns) for the classes which encapsulate the _functionality_ (verbs). In many cases this is quite difficult, and you end up with names that don't succinctly but completely summarise the functionality being encapsulated.
 
@@ -33,11 +39,11 @@ But when trying to think of a class name, it's tricky. Should the class do more 
 
 I'm not great at naming, but I feel that naming should be something that programmers can do in their sleep. Looking at any OOP codebase, that's simply not the case.
 
-### Accidental complexity
+#### Accidental complexity
 
 By writing this “architecture” code that does not directly address the data transformation problems at hand, we have burdened ourselves with accidental complexity and latent problems that will at some point prevent us from solving the actual problems we have.
 
-### Many sources of truth
+#### Many sources of truth
 
 Breaking an app up into smaller communicating objects by definition scatters the state of the application across its codebase. It becomes hard to observe and reason about the state of the application.
 
@@ -50,13 +56,13 @@ According to accepted good practice an object should have a limited view of the 
 
 Often a requirements change causes the programmer to decide between one or more quick fixes that introduce tech debt (e.g., give object A a reference to object B, or duplicate state and keep it in sync) or a difficult refactor of the object graph.
 
-### Object management
+#### Object management
 
 Once the code is split into objects, the program needs to create and maintain the collection of objects, and the references in-between. Whole frameworks (Dependency Injection) have been created to try and remove the burden of object creation from the programmer.
 
 The dynamically allocated nature of object memory also gives rise to its own problems, such as strong reference cycles in languages which use reference counting to automatically free memory of unused objects.
 
-## Inheritance
+### Inheritance
 
 Extending/overriding/reusing a class behaviour via subclassing.
 
@@ -68,15 +74,15 @@ Overriding behaviour generally makes code difficult to follow, difficult to reas
 
 For these reasons (and probably others), inheritance is nowadays generally frowned upon as a mechanism for code reuse.
 
-# Non-characteristics of OOP
+## Non-characteristics of OOP
 
 These are characteristics which are claimed as those of OOP, which are in fact available to programmers independently of OOP.
 
-## Information hiding
+### Information hiding
 
 The ability to prevent access to functions or data via visibility specifiers like public, internal, private, etc. Most languages have mechanisms for making things private to a module or file, so OOP does not grant this ability.
 
-## Encapsulation
+### Encapsulation
 
 The bundling of data with the functions that work with that data. Encapsulation is provided outside of OOP by way of modules.
 
@@ -84,7 +90,7 @@ Inheritance (arguably OOP’s defining feature) works _against_ encapsulation. [
 
 In many cases, problems are solved when we take data from one place, do something with it, and pass it to another. In that case, what is the point in making the data inaccessible, or accessible only via getters and so on?
 
-# How did OOP become the dominant paradigm?
+## How did OOP become the dominant paradigm?
 
 My experience of OOP was that it came to be popular first through Java, then other languages like C++ and C#.
 
@@ -105,7 +111,7 @@ In addition to that, OOP was heavily marketed as an effective way to write progr
 2. ...
 3. Profit!
 
-# What was so bad about Java and “pure” OOP?
+## What was so bad about Java and “pure” OOP?
 
 Java had (past tense, as my Java experience is now outdated) a few very specific potentially harmful attributes.
 
@@ -115,7 +121,7 @@ There were no “data structure” types other than classes. This meant that dat
 
 Shared mutable state is also awful for concurrency, but that’s a topic for another day.
 
-# The never-ending plateau of learning OOP
+## The never-ending plateau of learning OOP
 
 Once OOP was established, there were a plethora of books written on the “right way” to architect OOP programs.
 
@@ -135,7 +141,7 @@ Clean architecture was always just around the corner, but after trying for appro
 
 I’m not the only one who has arrived at this conclusion: Casey Muratori recorded [an excellent rant on the topic](https://www.youtube.com/watch?v=ZM1ZDaaEyMY). It's a short video and well worth your time.
 
-# Where is OOP headed?
+## Where is OOP headed?
 
 OOP’s defining feature (inheritance) is generally regarded to be a poor form of code reuse, and is to be avoided.
 

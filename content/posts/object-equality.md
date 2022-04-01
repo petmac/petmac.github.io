@@ -1,10 +1,15 @@
 ---
-title: "Object Equality"
 date: 2022-03-23T14:19:29Z
+description: ""
 draft: true
+featured_image: ""
+tags: []
+title: "Object Equality"
+toc: true
+type: "post"
 ---
 
-# Context
+## Introduction
 
 One of the first code smells we encounter when working with object-oriented languages where everything is an *object*, or everything subclasses an `Object` base class, is how OOP typically handles equality of objects.
 
@@ -12,7 +17,7 @@ For value types such as integers and floating point numbers, it's not controvers
 
 For types passed by reference, such as classes in Java, C#, Swift, Objective-C and so on, it's extremely complicated. Are two objects equal if they are in fact two references to the same object? Are two objects equal if each field is equal? What about if the objects share a common base class but are not exactly the same class themselves?
 
-# Deep dive into C#
+## Deep dive into C#
 
 Microsoft have documented [how to define value equality for a class or struct](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/how-to-define-value-equality-for-a-type). It's a bit of a wild ride.
 
@@ -80,7 +85,7 @@ class TwoDPoint : IEquatable<TwoDPoint>
 
 This class is a container for 8 bytes. We're going to do a *lot* of work to compare these 8 bytes against another 8 bytes. Let's dig in.
 
-## `System.Object.Equals` override
+### `System.Object.Equals` override
 
 ```csharp
 public override bool Equals(object obj) => this.Equals(obj as TwoDPoint);
@@ -94,7 +99,7 @@ To paraphrase [Dr. Venkat Subramaniam](https://twitter.com/venkat_s):
 
 Strive to write code which has obviously no problems, rather than code which has no obvious problems.
 
-## `IEquatable<T>.Equals` implementation
+### `IEquatable<T>.Equals` implementation
 
 Acknowledging that `System.Object.Equals` is terrible, Microsoft provided *another* equality mechanism: The interface `IEquatable<T>`. This improves on the previous approach by allowing the programmer to constrain the types of object that we can compare equality to. Sounds good, right?
 
@@ -144,7 +149,7 @@ Finally, after a dozen lines of boilerplate, we reach the actual comparison. The
 
 There is another lurking footgun, where we must be absolutely sure not to call into a base class, or risk infinite recursion, or inadvertently performing reference equality.
 
-## `System.Object.GetHashCode` override
+### `System.Object.GetHashCode` override
 
 ```csharp
 public override int GetHashCode() => (X, Y).GetHashCode();
@@ -156,7 +161,7 @@ It's been a while since I used C#. I wonder does the compiler enforce this requi
 
 Again, we access the `X` and `Y` fields here, so if any more fields are added, this code should be updated. I say *should* rather than *must*, as I understand it's sometimes OK for a hash code to not always use every field. I'm not an expert in hashing. I would probably use all fields just to be safe.
 
-## `==` operator
+### `==` operator
 
 Microsoft also advises that we implement yet another equality mechanism, the `==` and `!=` operators.
 
@@ -182,7 +187,7 @@ We have to write a few lines of easy-to-get-wrong boilerplate, then we call into
 
 What a lot of work, to compare such a small number of bytes.
 
-## `!=` operator
+### `!=` operator
 
 And finally, the language is not clever enough to implement `!=` for us when we implement `==`, so it is added manually:
 
@@ -190,7 +195,7 @@ And finally, the language is not clever enough to implement `!=` for us when we 
 public static bool operator !=(TwoDPoint lhs, TwoDPoint rhs) => !(lhs == rhs);
 ```
 
-## Records
+### Records
 
 Microsoft added a new type in C# 9, called a [Record](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record), which automatically implements equality for you.
 
