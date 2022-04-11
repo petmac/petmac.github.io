@@ -77,7 +77,7 @@ BLOG POSTS
 <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h2 id=introduction>Introduction</h2>
 <p>One of the first code smells we encounter when working with an object-oriented language where everything is an <em>object</em>, or everything subclasses a common base class, or there are no static methods, is how OOP typically handles equality of objects.</p>
 <p>For value types such as integers and floating point numbers, it&rsquo;s not controversial that we should be able to compare them and decide if they&rsquo;re equal or not. Integers can be compared by bits, and data structures can be compared by descending into the structure and comparing elements.</p>
-<p>For types passed by reference, such as classes in Java, C#, Swift, Objective-C and so on, it&rsquo;s extremely complicated. Sometimes we care about equality (two reference point to different objects, but those objects contain the same values) and sometimes we care about identity (two references point to the same object.)</p>
+<p>For types passed by reference, such as classes in Java, C#, Swift, Objective-C and so on, it&rsquo;s extremely complicated. Sometimes we care about equality (two references point to different objects, but those objects contain the same values) and sometimes we care about identity (two references point to the same object.)</p>
 <h2 id=properties-of-equatability>Properties of equatability</h2>
 <p>There are a few properties of equatability that we can consider to help us recognise whether a language has a good quality equality solution, or not.</p>
 <h3 id=equals-expressions-should-be-_commutative_>Equals expressions should be <em>commutative</em></h3>
