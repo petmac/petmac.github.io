@@ -2,9 +2,10 @@ module Main exposing (Model, Msg(..), main)
 
 import Browser
 import Browser.Navigation as Nav
+import Content exposing (PostContent, posts)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Routing exposing (Route(..), routeForUrl, routePath)
+import Routing exposing (Route(..), routeForUrl)
 import Url
 
 
@@ -84,32 +85,11 @@ view model =
     , body =
         [ text "The current page is: "
         , b [] [ text (Routing.toString model.route) ]
-        , ul [] (List.map viewLink postLinks)
+        , ul [] (List.map postLink posts)
         ]
     }
 
 
-viewLink : String -> Html msg
-viewLink path =
-    li [] [ a [ href path ] [ text path ] ]
-
-
-postLinks : List String
-postLinks =
-    List.filterMap routePath postRoutes
-
-
-postRoutes : List Route
-postRoutes =
-    List.map Post postNames
-
-
-postNames : List String
-postNames =
-    [ "object-equality"
-    , "oop"
-    , "removing-ref-cycles"
-    , "solid"
-    , "strong-and-weak-object-refs"
-    , "what-is-programming"
-    ]
+postLink : PostContent -> Html msg
+postLink content =
+    li [] [ a [ href ("/posts/" ++ content.name) ] [ text content.title ] ]
