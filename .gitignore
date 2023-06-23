@@ -1,1 +1,6 @@
+# macOS
 .DS_Store
+
+# Elm
+/elm-stuff/
+/index.html
