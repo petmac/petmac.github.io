@@ -5,8 +5,11 @@ import Browser.Navigation as Nav
 import Content exposing (PostContent, posts)
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Http
+import Page exposing (Page(..))
+import PostPage exposing (PostPage)
 import Routing exposing (Route(..), routeForUrl)
-import Url
+import Url exposing (Url)
 
 
 
@@ -31,13 +34,17 @@ main =
 
 type alias Model =
     { key : Nav.Key
-    , route : Route
+    , page : Page
     }
 
 
 init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 init _ url key =
-    ( Model key (routeForUrl url), Cmd.none )
+    let
+        ( page, cmd ) =
+            pageForUrl url
+    in
+    ( Model key page, cmd )
 
 
 
@@ -47,6 +54,7 @@ init _ url key =
 type Msg
     = LinkClicked Browser.UrlRequest
     | UrlChanged Url.Url
+    | GotPost (Result Http.Error String)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -61,9 +69,30 @@ update msg model =
                     ( model, Nav.load href )
 
         UrlChanged url ->
-            ( { model | route = routeForUrl url }
-            , Cmd.none
+            let
+                ( page, cmd ) =
+                    pageForUrl url
+            in
+            ( { model | page = page }
+            , cmd
             )
+
+        GotPost result ->
+            ( { model | page = PostPage (PostPage.build result) }, Cmd.none )
+
+
+pageForUrl : Url -> ( Page, Cmd Msg )
+pageForUrl url =
+    case routeForUrl url of
+        Post name ->
+            let
+                ( postPage, cmd ) =
+                    PostPage.load GotPost name
+            in
+            ( PostPage postPage, cmd )
+
+        NotFound path ->
+            ( NotFoundPage path, Cmd.none )
 
 
 
@@ -82,12 +111,20 @@ subscriptions _ =
 view : Model -> Browser.Document Msg
 view model =
     { title = "Peter Mackay"
-    , body =
-        [ text "The current page is: "
-        , b [] [ text (Routing.toString model.route) ]
-        , ul [] (List.map postLink posts)
-        ]
+    , body = body model.page
     }
+
+
+body : Page -> List (Html msg)
+body page =
+    case page of
+        PostPage pp ->
+            PostPage.body pp
+
+        NotFoundPage path ->
+            [ text path
+            , ul [] (List.map postLink posts)
+            ]
 
 
 postLink : PostContent -> Html msg
