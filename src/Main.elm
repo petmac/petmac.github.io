@@ -34,7 +34,7 @@ main =
 
 type alias Model =
     { key : Nav.Key
-    , page : Page
+    , page : Page Msg
     }
 
 
@@ -81,7 +81,7 @@ update msg model =
             ( { model | page = PostPage (PostPage.build result) }, Cmd.none )
 
 
-pageForUrl : Url -> ( Page, Cmd Msg )
+pageForUrl : Url -> ( Page Msg, Cmd Msg )
 pageForUrl url =
     case routeForUrl url of
         Post name ->
@@ -115,7 +115,7 @@ view model =
     }
 
 
-body : Page -> List (Html msg)
+body : Page Msg -> List (Html Msg)
 body page =
     case page of
         PostPage pp ->
@@ -127,6 +127,6 @@ body page =
             ]
 
 
-postLink : PostContent -> Html msg
+postLink : PostContent -> Html Msg
 postLink content =
     li [] [ a [ href ("/posts/" ++ content.name) ] [ text content.title ] ]
