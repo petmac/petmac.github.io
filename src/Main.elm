@@ -1,9 +1,10 @@
-module Main exposing (Model, Msg(..), init, main, subscriptions, update, view, viewLink)
+module Main exposing (Model, Msg(..), main)
 
 import Browser
 import Browser.Navigation as Nav
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Routing exposing (Route(..), routeForUrl, routePath)
 import Url
 
 
@@ -29,13 +30,13 @@ main =
 
 type alias Model =
     { key : Nav.Key
-    , url : Url.Url
+    , route : Route
     }
 
 
 init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 init _ url key =
-    ( Model key url, Cmd.none )
+    ( Model key (routeForUrl url), Cmd.none )
 
 
 
@@ -59,7 +60,7 @@ update msg model =
                     ( model, Nav.load href )
 
         UrlChanged url ->
-            ( { model | url = url }
+            ( { model | route = routeForUrl url }
             , Cmd.none
             )
 
@@ -79,17 +80,11 @@ subscriptions _ =
 
 view : Model -> Browser.Document Msg
 view model =
-    { title = "URL Interceptor"
+    { title = "Peter Mackay"
     , body =
-        [ text "The current URL is: "
-        , b [] [ text (Url.toString model.url) ]
-        , ul []
-            [ viewLink "/home"
-            , viewLink "/profile"
-            , viewLink "/reviews/the-century-of-the-self"
-            , viewLink "/reviews/public-opinion"
-            , viewLink "/reviews/shah-of-shahs"
-            ]
+        [ text "The current page is: "
+        , b [] [ text (Routing.toString model.route) ]
+        , ul [] (List.map viewLink postLinks)
         ]
     }
 
@@ -97,3 +92,24 @@ view model =
 viewLink : String -> Html msg
 viewLink path =
     li [] [ a [ href path ] [ text path ] ]
+
+
+postLinks : List String
+postLinks =
+    List.filterMap routePath postRoutes
+
+
+postRoutes : List Route
+postRoutes =
+    List.map Post postNames
+
+
+postNames : List String
+postNames =
+    [ "object-equality"
+    , "oop"
+    , "removing-ref-cycles"
+    , "solid"
+    , "strong-and-weak-object-refs"
+    , "what-is-programming"
+    ]
