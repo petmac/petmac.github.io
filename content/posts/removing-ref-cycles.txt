@@ -1,13 +1,4 @@
----
-date: 2022-03-17T23:47:10Z
-description: ""
-draft: false
-featured_image: ""
-tags: []
-title: "Removing Reference Cycles"
-toc: true
-type: "post"
----
+# Removing Reference Cycles
 
 ## Introduction
 

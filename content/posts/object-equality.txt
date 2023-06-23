@@ -1,13 +1,4 @@
----
-date: 2022-04-01T15:26:29Z
-description: ""
-draft: false
-featured_image: ""
-tags: []
-title: "Object Equality"
-toc: true
-type: "post"
----
+# Object Equality
 
 ## Introduction
 
