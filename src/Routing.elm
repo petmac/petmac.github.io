@@ -1,4 +1,4 @@
-module Routing exposing (Route(..), routeForUrl, routePath, toString)
+module Routing exposing (Route(..), routeForUrl, toString)
 
 import Url exposing (Url)
 import Url.Parser exposing ((</>), Parser, map, oneOf, parse, s, string)
@@ -24,16 +24,6 @@ routeParser =
     oneOf
         [ map Post (s "posts" </> string)
         ]
-
-
-routePath : Route -> Maybe String
-routePath route =
-    case route of
-        Post name ->
-            Just ("/posts/" ++ name)
-
-        NotFound _ ->
-            Nothing
 
 
 toString : Route -> String
