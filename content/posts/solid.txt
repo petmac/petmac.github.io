@@ -1,5 +1,7 @@
 # The SOLID Principles
 
+March 17, 2022
+
 ## Introduction
 
 In order to guide programmers to effectively apply object-oriented design, the industry settled on what we call [the SOLID principles](https://en.wikipedia.org/wiki/SOLID).

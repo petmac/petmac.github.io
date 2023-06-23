@@ -1,5 +1,7 @@
 # Object Equality
 
+April 1, 2022
+
 ## Introduction
 
 One of the first code smells we encounter when working with an object-oriented language where everything is an _object_, or everything subclasses a common base class, or there are no static methods, is how OOP typically handles equality of objects.

@@ -1,5 +1,7 @@
 # Strong and Weak Object References
 
+March 17, 2022
+
 ## Introduction
 
 An object maintains a reference/pointer to another object so it can call a method or access a property. References are called _strong_ if the relationship between the objects is one of ownership, and _weak_ or _unowned_ if it the object containing the reference does not own the object being referred to.

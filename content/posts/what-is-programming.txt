@@ -1,5 +1,7 @@
 # What is Programming?
 
+March 17, 2022
+
 ## Introduction
 
 This page borrows heavily from [Mike Acton](https://twitter.com/mike_acton).
