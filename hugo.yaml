@@ -1,0 +1,20 @@
+baseURL: https://petmac.dev/
+languageCode: en-gb
+title: Peter Mackay
+theme: ananke
+
+SectionPagesMenu: main
+
+params:
+  ananke:
+    social:
+      follow:
+        networks: [bluesky, github, mastodon, twitter]
+      bluesky:
+        username: petmac.bsky.social
+      github:
+        username: petmac
+      mastodon:
+        profilelink: https://mastodon.gamedev.place/@petmac
+      twitter:
+        username: petmac
