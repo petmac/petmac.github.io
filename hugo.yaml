@@ -9,7 +9,7 @@ params:
   ananke:
     social:
       follow:
-        networks: [bluesky, github, mastodon, twitter]
+        networks: [mastodon, bluesky, github, twitter]
       bluesky:
         username: petmac.bsky.social
       github:
