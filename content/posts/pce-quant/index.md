@@ -4,9 +4,15 @@ description: ""
 draft: false
 featured_image: ""
 tags: []
-title: "PC Engine tile-based quantisation"
+title: "PC Engine tile-based quantisation, part 1"
 toc: true
 type: "post"
+---
+
+## Update, 24 Dec 2024
+
+Check out [Part 2](../pce-quant-2/), where loading times get much improved!
+
 ---
 
 ## Introduction
@@ -205,7 +211,7 @@ First, when grouping similar tiles, a huge amount of information was thrown away
 
 The second thing that bothered me was the colour space partitioning algorithm, and how it only split the space into axis-aligned regions. Other than that, I was quite happy with the BSP approach.
 
-## Attempt 2: k-means clustering
+## Attempt 2: _k_-means clustering
 
 While I was impressed that someone with no experience in quantisation could just dive in and get decent results, I did some more investigation into the algorithms that "proper" paint packages use for this kind of processing.
 
