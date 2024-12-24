@@ -66,7 +66,7 @@ I would have liked to also remove the non-determinism from `clustering`, but dec
 
 ## Background colour
 
-I then noticied in the Mesen tile map debugger, that many of my tiles included a colour that was not in the palette for that tile. For example:
+I then noticed in the Mesen tile map debugger, that many of my tiles included a colour that was not in the palette for that tile. For example:
 
 ![Mesen showing incorrect colours](mesen-wrong-colours.png)
 
