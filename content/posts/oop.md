@@ -141,7 +141,7 @@ Clean architecture was always just around the corner, but after trying for appro
 
 I’m not the only one who has arrived at this conclusion: Casey Muratori recorded an excellent rant on the topic:
 
-{{< youtube ZM1ZDaaEyMY >}}
+<iframe width="739" height="416" src="https://www.youtube.com/embed/ZM1ZDaaEyMY" title="Casey and the Holy OOP Grail" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 It's a short video and well worth your time.
 
