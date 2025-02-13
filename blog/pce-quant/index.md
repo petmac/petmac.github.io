@@ -21,6 +21,8 @@ I spend some time in the evenings working on various toy projects. It's a good w
 
 Anyway, a while back I bought an [Analogue Duo](https://www.analogue.co/duo), which is a high quality FPGA clone of the old 8/16-bit [PC Engine](https://en.wikipedia.org/wiki/TurboGrafx-16) console.
 
+<!-- truncate -->
+
 I say 8/16 rather than just 16-bit, because while the GPU was 16-bit, the CPU was an 8-bit [HuC6280](https://en.wikipedia.org/wiki/Hudson_Soft_HuC6280) -- a derivative of the legendary 6502 CPU, with a bunch of handy extra instructions and so on. Oh, and 4 times the typical speed.
 
 The PC Engine also had a CD-ROM expansion, which allowed plenty of storage. An almost unimaginable amount for the time.

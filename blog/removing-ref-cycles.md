@@ -13,6 +13,8 @@ type: "post"
 
 If you are gainfully employed as a programmer, you have probably been forced to accept object-oriented programming into your life. When working with a language like Swift or C++ which doesn't have garbage collection, you will end up in the debugger, trying to locate a strong reference cycle which has resulted in a memory leak.
 
+<!-- truncate -->
+
 Or, you're reviewing a Pull Request and notice that there is a cyclic relationship between some classes.
 
 It's good to have some coping strategies for such events. Let's work through an example.

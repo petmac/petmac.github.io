@@ -13,6 +13,8 @@ type: "post"
 
 An object maintains a reference/pointer to another object so it can call a method or access a property. References are called _strong_ if the relationship between the objects is one of ownership, and _weak_ or _unowned_ if it the object containing the reference does not own the object being referred to.
 
+<!-- truncate -->
+
 In languages like Swift, Objective-C, and C++, it’s required that we don’t create _cycles_ of strong references, or we get memory leaks.
 
 A cycle is when an object "A" points directly or indirectly to another object "B", and object "B" points directly or indirectly back to object "A".

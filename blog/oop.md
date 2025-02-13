@@ -21,6 +21,8 @@ The programmer is able to model the problem space in terms of objects that talk 
 
 I believe this to be a poor approach to most data transformation problems.
 
+<!-- truncate -->
+
 #### Noun-ification
 
 To encapsulate with OOP, you have to invent _names_ (nouns) for the classes which encapsulate the _functionality_ (verbs). In many cases this is quite difficult, and you end up with names that don't succinctly but completely summarise the functionality being encapsulated.

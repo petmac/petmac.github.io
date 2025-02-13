@@ -13,6 +13,8 @@ type: "post"
 
 One of the first code smells we encounter when working with an object-oriented language where everything is an _object_, or everything subclasses a common base class, or there are no static methods, is how OOP typically handles equality of objects.
 
+<!-- truncate -->
+
 For value types such as integers and floating point numbers, it's not controversial that we should be able to compare them and decide if they're equal or not. Integers can be compared by bits, and data structures can be compared by descending into the structure and comparing elements.
 
 For types passed by reference, such as classes in Java, C#, Swift, Objective-C and so on, it's extremely complicated. Sometimes we care about equality (two references point to different objects, but those objects contain the same values) and sometimes we care about identity (two references point to the same object.)

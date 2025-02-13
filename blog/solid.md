@@ -15,6 +15,8 @@ In order to guide programmers to effectively apply object-oriented design, the i
 
 I believe that while the SOLID principles were marketed to encourage “good” use of OOP, they just as effectively _discourage_ the use of OOP!
 
+<!-- truncate -->
+
 ## The principles
 
 ### Single responsibility principle

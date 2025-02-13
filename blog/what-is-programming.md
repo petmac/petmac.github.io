@@ -17,6 +17,8 @@ This page borrows heavily from [Mike Acton](https://twitter.com/mike_acton).
 
 Writing code is a means to solving a problem, and primarily the problem is that some data (input) needs to be transformed into something else (output).
 
+<!-- truncate -->
+
 Examples of inputs:
 
 - Button taps
