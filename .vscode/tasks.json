@@ -3,12 +3,15 @@
   "tasks": [
     {
       "type": "shell",
-      "command": "hugo server --buildDrafts --disableFastRender",
+      "command": "npx docusaurus start",
       "problemMatcher": [],
-      "label": "Build",
+      "label": "Start",
       "group": {
         "kind": "build",
         "isDefault": true
+      },
+      "presentation": {
+        "clear": true
       }
     }
   ]
