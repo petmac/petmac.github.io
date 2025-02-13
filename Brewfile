@@ -1,1 +1,1 @@
-brew "hugo"
+brew "node"
