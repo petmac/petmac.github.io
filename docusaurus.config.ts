@@ -57,7 +57,6 @@ const config: Config = {
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
           routeBasePath: 'posts',
-          path: './content/posts'
         },
         theme: {
           customCss: './src/css/custom.css',
