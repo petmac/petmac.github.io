@@ -50,6 +50,7 @@ const config = {
           sidebarPath: './sidebars.js',
         },
         blog: {
+          routeBasePath: 'posts',
           showReadingTime: true,
           feedOptions: {
             type: ['rss', 'atom'],
@@ -88,7 +89,7 @@ const config = {
             position: 'left',
             label: 'Tutorial',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          {to: '/posts', label: 'Posts', position: 'left'},
           {
             href: 'https://github.com/facebook/docusaurus',
             label: 'GitHub',
@@ -129,8 +130,8 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
+                label: 'Posts',
+                to: '/posts',
               },
               {
                 label: 'GitHub',

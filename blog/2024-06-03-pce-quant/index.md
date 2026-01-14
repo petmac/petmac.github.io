@@ -1,23 +1,21 @@
 ---
-date: 2024-06-03T22:20:39+01:00
-description: ""
-draft: false
-featured_image: ""
+slug: pce-quant
+title: PC Engine tile-based quantisation, part 1
+authors: [petmac]
 tags: []
-title: "PC Engine tile-based quantisation, part 1"
-toc: true
-type: "post"
 ---
 
 ## Update, 24 Dec 2024
 
-Check out [Part 2](../pce-quant-2/), where loading times get much improved!
+Check out [Part 2](pce-quant-2), where loading times get much improved!
 
 ---
 
 ## Introduction
 
 I spend some time in the evenings working on various toy projects. It's a good way to exercise a programmer brain in a way that a day job generally doesn't.
+
+<!-- truncate -->
 
 Anyway, a while back I bought an [Analogue Duo](https://www.analogue.co/duo), which is a high quality FPGA clone of the old 8/16-bit [PC Engine](https://en.wikipedia.org/wiki/TurboGrafx-16) console.
 

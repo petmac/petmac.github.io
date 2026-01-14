@@ -1,17 +1,15 @@
 ---
-date: 2022-03-17T16:22:11Z
-description: ""
-draft: false
-featured_image: ""
+slug: what-is-programming
+title: What is Programming?
+authors: [petmac]
 tags: []
-title: "What is Programming?"
-toc: true
-type: "post"
 ---
 
 ## Introduction
 
 This page borrows heavily from [Mike Acton](https://twitter.com/mike_acton).
+
+<!-- truncate -->
 
 ## Transformation of data
 

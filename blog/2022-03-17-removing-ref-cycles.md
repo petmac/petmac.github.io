@@ -1,17 +1,15 @@
 ---
-date: 2022-03-17T23:47:10Z
-description: ""
-draft: false
-featured_image: ""
+slug: removing-ref-cycles
+title: Removing Reference Cycles
+authors: [petmac]
 tags: []
-title: "Removing Reference Cycles"
-toc: true
-type: "post"
 ---
 
 ## Introduction
 
 If you are gainfully employed as a programmer, you have probably been forced to accept object-oriented programming into your life. When working with a language like Swift or C++ which doesn't have garbage collection, you will end up in the debugger, trying to locate a strong reference cycle which has resulted in a memory leak.
+
+<!-- truncate -->
 
 Or, you're reviewing a Pull Request and notice that there is a cyclic relationship between some classes.
 

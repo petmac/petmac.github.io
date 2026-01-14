@@ -1,17 +1,15 @@
 ---
-date: 2024-12-23T22:36:59Z
-description: ""
-draft: false
-featured_image: ""
+slug: pce-quant-2
+title: PC Engine tile-based quantisation, part 2
+authors: [petmac]
 tags: []
-title: "PC Engine tile-based quantisation, part 2"
-toc: true
-type: "post"
 ---
 
 ## Introduction
 
-While exploring [PC Engine image quality and quantisation](../pce-quant/), I found that when loading an image from CD-ROM to VRAM, it took something like 6 seconds for the load to finish.
+While exploring [PC Engine image quality and quantisation](pce-quant), I found that when loading an image from CD-ROM to VRAM, it took something like 6 seconds for the load to finish.
+
+<!-- truncate -->
 
 I thought this was a hardware limitation at the time, and supposed that this was the reason that PC Engine games from back in the day didn't feature more colourful background graphics.
 

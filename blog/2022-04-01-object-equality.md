@@ -1,17 +1,15 @@
 ---
-date: 2022-04-01T15:26:29Z
-description: ""
-draft: false
-featured_image: ""
+slug: object-equality
+title: Object Equality
+authors: [petmac]
 tags: []
-title: "Object Equality"
-toc: true
-type: "post"
 ---
 
 ## Introduction
 
 One of the first code smells we encounter when working with an object-oriented language where everything is an _object_, or everything subclasses a common base class, or there are no static methods, is how OOP typically handles equality of objects.
+
+<!-- truncate -->
 
 For value types such as integers and floating point numbers, it's not controversial that we should be able to compare them and decide if they're equal or not. Integers can be compared by bits, and data structures can be compared by descending into the structure and comparing elements.
 
